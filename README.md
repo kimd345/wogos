@@ -4,7 +4,7 @@ Plan:
 https://docs.google.com/document/d/1JitnTgYHJYrS2TAP2Cb3uzuZmllCGu5mXdty2qRWfQk/edit?usp=sharing
 
 Schema:
-https://app.lucidchart.com/invitations/accept/eaf9e964-794e-47f5-b0a3-34313527936f
+https://dbdiagram.io/d/5f4aa9ba88d052352cb545f6
 
 (below is Ian's README)
 
