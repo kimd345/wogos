@@ -1,3 +1,10 @@
+# Planning
+
+Schema:
+https://app.lucidchart.com/invitations/accept/eaf9e964-794e-47f5-b0a3-34313527936f
+
+---
+
 # Flask React Project
 
 This is the backend for the Flask React project.
