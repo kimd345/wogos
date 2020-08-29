@@ -1,0 +1,2 @@
+# gog
+GOG clone
