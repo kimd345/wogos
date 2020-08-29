@@ -1,7 +1,12 @@
 # Planning
 
+Plan:
+https://docs.google.com/document/d/1JitnTgYHJYrS2TAP2Cb3uzuZmllCGu5mXdty2qRWfQk/edit?usp=sharing
+
 Schema:
 https://app.lucidchart.com/invitations/accept/eaf9e964-794e-47f5-b0a3-34313527936f
+
+(below is Ian's README)
 
 ---
 
