@@ -22,12 +22,6 @@ db.init_app(app)
 login = LoginManager(app)
 login.login_view = "session.login"
 
-
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
 # Application Security
 CORS(app)
 

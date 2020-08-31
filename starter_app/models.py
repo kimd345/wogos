@@ -165,6 +165,7 @@ class Feature(db.Model):
             "feature": self.feature
         }
 
+
     @property
     def password(self):
         return self.hashed_password
