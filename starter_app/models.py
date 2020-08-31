@@ -84,6 +84,7 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(200))
     price = db.Column(db.Float, nullable=False)
     sale = db.Column(db.Integer, nullable=True)
     description = db.Column(db.Text)
@@ -102,6 +103,7 @@ class Game(db.Model):
             "id": self.id,
             "title": self.title,
             "price": self.check_sale(),
+            "image_url": self.image_url,
             "sale": self.sale,
             "description": self.description,
             "requirements": self.requirements,
