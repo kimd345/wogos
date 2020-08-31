@@ -1,0 +1,15 @@
+.store-container {
+    background-color: lavender;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+.store-container__left {
+
+}
+
+.store-container__right {
+
+}
