@@ -8,3 +8,9 @@ user_routes = Blueprint('users', __name__)
 def index():
     response = User.query.all()
     return {"users": [user.to_dict() for user in response]}
+
+
+@user_routes.route('/<id>')
+def user(id):
+    response = User.query.get(id)
+    return response.to_dict()
