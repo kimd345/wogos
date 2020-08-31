@@ -56,9 +56,9 @@ class User(db.Model):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "orders": self.orders,
-            "reviews": self.reviews,
-            "cart_items": self.cart_items
+            "orders": [order.to_dict() for order in self.orders],
+            "reviews": [review.to_dict() for review in self.reviews],  # noqa
+            "cart_items": [game.to_dict() for game in self.cart_items]
         }
 
 
@@ -105,10 +105,10 @@ class Game(db.Model):
             "sale": self.sale,
             "description": self.description,
             "requirements": self.requirements,
-            "genres": self.genres,
-            "features": self.features,
-            "orders": self.orders,
-            "reviews": self.reviews
+            "genres": [genre.to_dict() for genre in self.genres],
+            "features": [feature.to_dict() for feature in self.features],
+            "orders": [order.to_dict() for order in self.orders],
+            "reviews": [review.to_dict() for review in self.reviews]
         }
 
     def check_sale(self):

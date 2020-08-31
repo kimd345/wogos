@@ -35,9 +35,20 @@ with app.app_context():
     rpg = Genre(genre='Role Playing Game')
     mmo = Genre(genre='Massive Multiplayer Online')
 
+    game1.genres.append(fps)
+    game2.genres.append(mmo)
+    game2.genres.append(rpg)
+
     third_person = Feature(feature='Third Person Camera')
     looter_shooter = Feature(feature='Looter Shooter')
     casual = Feature(feature='Filthy Casual')
+
+    game1.features.append(looter_shooter)
+    game1.features.append(casual)
+    game2.features.append(third_person)
+
+    ian.cart_items.append(game1)
+    dean.cart_items.append(game2)
 
     db.session.add(ian)
     db.session.add(javier)
