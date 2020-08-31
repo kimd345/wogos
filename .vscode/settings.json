@@ -1,5 +1,10 @@
 {
+<<<<<<< HEAD
     "python.linting.pycodestyleEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": false
+=======
+  "editor.tabSize": 2,
+  "python.pythonPath": "/home/about14sheep/gog/gog/.venv/bin/python3.8"
+>>>>>>> bf555bd287fb59c92d79f435382b112f954e585f
 }
