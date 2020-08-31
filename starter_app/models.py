@@ -2,6 +2,27 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+cart = db.Table('carts',
+                db.Column('user_id', db.Integer, db.ForeignKey(
+                    'users.id'), primary_key=True),
+                db.Column('game_id', db.Integer, db.ForeignKey(
+                    'games.id'), primary_key=True)
+                )
+
+game_genres = db.Table('games_genres',
+                       db.Column('game_id', db.Integer, db.ForeignKey(
+                           'games.id'), primary_key=True)
+                       db.Column('genre_id', db.Integer, db.ForeignKey(
+                           'genres.id'), primary_key=True)
+                       )
+
+game_features = db.Table('games_features',
+                         db.Column('game_id', db.Integer, db.ForeignKey(
+                             'games.id'), primary_key=True)
+                         db.Column('feature_id', db.Integer, db.ForeignKey(
+                             'features.id'), primary_key=True)
+                         )
+
 
 class User(db.Model):
     __tablename__ = 'users'
