@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.8-nodejs14 as base
+FROM idbentley/flask-react-dev:latest as base
 
 WORKDIR /var/www
 COPY . .
@@ -19,9 +19,7 @@ RUN ["cp", "-r", "client/build/", "starter_app/static"]
 
 # Setup Flask environment
 ENV FLASK_APP=starter_app
-ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
-ENV SECRET_KEY=lkasjdf09ajsdkfljalsiorj12n3490re9485309irefvn,u90818734902139489230
 
 EXPOSE 8000
 
