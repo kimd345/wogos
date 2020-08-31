@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, session
+from flask_login import LoginManager
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 
@@ -13,7 +14,16 @@ app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+# app.register_blueprint(session.bp)
 db.init_app(app)
+login = LoginManager(app)
+login.login_view = "session.login"
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 
 ## Application Security
 CORS(app)
