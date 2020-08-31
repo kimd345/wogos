@@ -54,16 +54,39 @@ class Order(db.Models):
     user = db.relationship("User", back_populates='orders')
     game = db.relationship("Game", back_populates='order')
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "game_id": self.game_id,
+            "price_paid": self.price_paid
+        }
+
 
 class Game(db.Models):
     __tablename__ = 'games'
 
     id = db.Column(db.Integer, primary_key=True)
-    tite = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     sale = db.Column(db.Integer, nullable=True)
     description = db.Column(db.Text)
     requirements = db.Column(db.String(250))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "price": self.check_sale(),
+            "sale": self.sale,
+            "description": self.description,
+            "requirements": self.requirements
+        }
+
+    def check_sale(self):
+        price = self.price if self.sale is None \
+            else self.price * (self.sale / 100)
+        return price
 
 
 class Review(db.Model):
@@ -77,6 +100,17 @@ class Review(db.Model):
     star_rating = db.Column(db.Integer, nullable=False)
     verified = db.Column(db.Boolean)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "game_id": self.game_id,
+            "title": self.title,
+            "body": self.body,
+            "star_rating": self.star_rating,
+            "verified": self.verified
+        }
+
 
 class Genre(db.Model):
     __tablename__ = 'genres'
@@ -84,9 +118,21 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String(100), nullable=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "genre": self.genre
+        }
+
 
 class Feature(db.Model):
     __tablename__ = 'features'
 
     id = db.Column(db.Integer, primary_key=True)
     feature = db.Column(db.String(200), nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "feature": self.feature
+        }
