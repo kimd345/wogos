@@ -1,10 +1,14 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint
 from flask_login import current_user, login_user, logout_user
 
 from starter_app.models import User
 
-bp = Blueprint("session", __name__, url_prefix="/session")
+session = Blueprint('session', __name__)
 
 
-# @bp.route("/", methods=["GET", "POST"])
-# def login():
+@session.route('', methods=['POST'])
+def login():
+    print('HEEEELLLOOOOO')
+    return {
+      'error': 'not yet implemented'
+    }

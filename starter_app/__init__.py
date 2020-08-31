@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 
 
 from starter_app.models import db, User
+from starter_app.api.session import session
 from starter_app.api.user_routes import user_routes
 from starter_app.api.game_routes import game_routes
 
@@ -14,8 +15,8 @@ from starter_app.config import Config
 app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
+app.register_blueprint(session, url_prefix='/api/session')
 app.register_blueprint(user_routes, url_prefix='/api/users')
-# app.register_blueprint(session.bp)
 app.register_blueprint(game_routes, url_prefix='/api/games')
 db.init_app(app)
 login = LoginManager(app)
