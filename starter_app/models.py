@@ -9,19 +9,19 @@ cart = db.Table('carts',
                     'games.id'), primary_key=True)
                 )
 
-game_genres = db.Table('games_genres',
-                       db.Column('game_id', db.Integer, db.ForeignKey(
-                           'games.id'), primary_key=True)
-                       db.Column('genre_id', db.Integer, db.ForeignKey(
-                           'genres.id'), primary_key=True)
-                       )
+genres = db.Table('games_genres',
+                  db.Column('game_id', db.Integer, db.ForeignKey(
+                      'games.id'), primary_key=True)
+                  db.Column('genre_id', db.Integer, db.ForeignKey(
+                      'genres.id'), primary_key=True)
+                  )
 
-game_features = db.Table('games_features',
-                         db.Column('game_id', db.Integer, db.ForeignKey(
-                             'games.id'), primary_key=True)
-                         db.Column('feature_id', db.Integer, db.ForeignKey(
-                             'features.id'), primary_key=True)
-                         )
+features = db.Table('games_features',
+                    db.Column('game_id', db.Integer, db.ForeignKey(
+                        'games.id'), primary_key=True)
+                    db.Column('feature_id', db.Integer, db.ForeignKey(
+                        'features.id'), primary_key=True)
+                    )
 
 
 class User(db.Model):
@@ -33,7 +33,10 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     session_token = db.Column(db.String(100))
 
-    orders = db.relationship("Order", back_populates='user')
+    orders = db.relationship("Order", backref='user')
+    reviews = db.relationship('Review', backref='user')
+    cart = db.relationship('Game', secondary=cart, lazy='subquery',
+                           backref=db.backref('users', lazy=True))
 
     def to_dict(self):
         return {
@@ -43,16 +46,13 @@ class User(db.Model):
         }
 
 
-class Order(db.Models):
+class Order(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
     price_paid = db.Column(db.Float, nullable=False)
-
-    user = db.relationship("User", back_populates='orders')
-    game = db.relationship("Game", back_populates='order')
 
     def to_dict(self):
         return {
@@ -63,7 +63,7 @@ class Order(db.Models):
         }
 
 
-class Game(db.Models):
+class Game(db.Model):
     __tablename__ = 'games'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -72,6 +72,14 @@ class Game(db.Models):
     sale = db.Column(db.Integer, nullable=True)
     description = db.Column(db.Text)
     requirements = db.Column(db.String(250))
+
+    orders = db.relationship('Order', backref='game')
+    reviews = db.relationship('Review', backref='game')
+
+    genres = db.relationship('Genre', secondary=genres, lazy='subquery',
+                             backref=db.backref('games', lazy=True))
+    features = db.relationship('Feature', secondary=features, lazy='subquery',
+                               backref=db.backref('games', lazy=True))
 
     def to_dict(self):
         return {
