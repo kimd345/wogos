@@ -4,12 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-cart = db.Table('carts',
-                db.Column('user_id', db.Integer, db.ForeignKey(
-                    'users.id'), primary_key=True),
-                db.Column('game_id', db.Integer, db.ForeignKey(
-                    'games.id'), primary_key=True)
-                )
+cart_items = db.Table('carts',
+                      db.Column('user_id', db.Integer, db.ForeignKey(
+                          'users.id'), primary_key=True),
+                      db.Column('game_id', db.Integer, db.ForeignKey(
+                          'games.id'), primary_key=True)
+                      )
 
 genres = db.Table('games_genres',
                   db.Column('game_id', db.Integer, db.ForeignKey(
@@ -37,8 +37,8 @@ class User(db.Model):
 
     orders = db.relationship("Order", backref='user')
     reviews = db.relationship('Review', backref='user')
-    cart = db.relationship('Game', secondary=cart, lazy='subquery',
-                           backref=db.backref('users', lazy=True))
+    cart_items = db.relationship('Game', secondary=cart_items, lazy='subquery',
+                                 backref=db.backref('users', lazy=True))
 
     @property
     def password(self):
@@ -55,7 +55,10 @@ class User(db.Model):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            "orders": self.orders,
+            "reviews": self.reviews,
+            "cart_items": self.cart_items
         }
 
 
@@ -101,7 +104,11 @@ class Game(db.Model):
             "price": self.check_sale(),
             "sale": self.sale,
             "description": self.description,
-            "requirements": self.requirements
+            "requirements": self.requirements,
+            "genres": self.genres,
+            "features": self.features,
+            "orders": self.orders,
+            "reviews": self.reviews
         }
 
     def check_sale(self):
