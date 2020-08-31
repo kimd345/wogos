@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 
 import UserList from './components/UsersList';
+import Login from './components/Login';
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
             </ul>
         </nav>
         <Switch>
+            <Route path="/login">
+                <Login />
+            </Route>
+
             <Route path="/users">
                 <UserList />
             </Route>
