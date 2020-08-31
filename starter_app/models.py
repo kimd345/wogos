@@ -1,4 +1,6 @@
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -11,14 +13,14 @@ cart = db.Table('carts',
 
 genres = db.Table('games_genres',
                   db.Column('game_id', db.Integer, db.ForeignKey(
-                      'games.id'), primary_key=True)
+                      'games.id'), primary_key=True),
                   db.Column('genre_id', db.Integer, db.ForeignKey(
                       'genres.id'), primary_key=True)
                   )
 
 features = db.Table('games_features',
                     db.Column('game_id', db.Integer, db.ForeignKey(
-                        'games.id'), primary_key=True)
+                        'games.id'), primary_key=True),
                     db.Column('feature_id', db.Integer, db.ForeignKey(
                         'features.id'), primary_key=True)
                     )
@@ -30,13 +32,24 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    password = db.Column(db.String(100), nullable=False)
+    hashed_password = db.Column(db.String(100), nullable=False)
     session_token = db.Column(db.String(100))
 
     orders = db.relationship("Order", backref='user')
     reviews = db.relationship('Review', backref='user')
     cart = db.relationship('Game', secondary=cart, lazy='subquery',
                            backref=db.backref('users', lazy=True))
+
+    @property
+    def password(self):
+        return self.hashed_password
+
+    @password.setter
+    def password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def to_dict(self):
         return {
