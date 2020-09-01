@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash
 from starter_app.models import User, Order, Game, Review, Genre, Feature
+from bs4 import BeautifulSoup
 from starter_app import app, db
 from dotenv import load_dotenv
 import requests
@@ -51,13 +52,16 @@ with app.app_context():
     def build_dict(item):
         req = [platform['requirements']
                for platform in item['platforms'] if platform['platform']['id'] is 4][0]  # noqa
+        desc = BeautifulSoup(item['description'], 'html.parser')
+        req = req['minimum'] if req else 'This game will run on any modern computer'  # noqa
+        req_soup = BeautifulSoup(req, 'html.parser')
         return {
             'title': item['name'],
             'image_url': item['background_image'],
-            'description': item['description'],
+            'description': desc.get_text(),
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
-            'requirements': req['minimum'] if req else 'This game will run on any modern computer'  # noqa
+            'requirements':  req_soup.get_text()  # noqa
         }
 
     def get_genres():
