@@ -3,23 +3,25 @@ from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
 
+from werkzeug.security import generate_password_hash
+
 
 with app.app_context():
     db.drop_all()
     db.create_all()
 
     ian = User(username='Ian', email='ian@aa.io',
-               hashed_password='auhgdfiaufhggasrgargarg')
+               hashed_password=generate_password_hash('password'))
     javier = User(username='Javier', email='javier@aa.io',
-                  hashed_password='auhgdfiaufhggasrgargarg')
+                  hashed_password=generate_password_hash('password'))
     dean = User(username='Dean', email='dean@aa.io',
-                hashed_password='auhgdfiaufhggasrgargarg')
+                hashed_password=generate_password_hash('password'))
     angela = User(username='Angela', email='angela@aa.io',
-                  hashed_password='auhgdfiaufhggasrgargarg')
+                  hashed_password=generate_password_hash('password'))
     soonmi = User(username='Soon-Mi', email='soonmi@aa.io',
-                  hashed_password='auhgdfiaufhggasrgargarg')
+                  hashed_password=generate_password_hash('password'))
     alissa = User(username='Alissa', email='alissa@aa.io',
-                  hashed_password='auhgdfiaufhggasrgargarg')
+                  hashed_password=generate_password_hash('password'))
 
     order1 = Order(user_id=1, game_id=1, price_paid=19.99)
     order2 = Order(user_id=2, game_id=1, price_paid=19.99)
