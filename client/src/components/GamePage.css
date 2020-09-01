@@ -1,0 +1,53 @@
+.game-page__banner {
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,0.25) 0%, rgba(126,126,126,0) 25%);
+  height: 650px;
+}
+
+.game-page__buy-block {
+  background-color: whitesmoke;
+  position: absolute;
+  padding: 15px;
+  width: 430px;
+  height: 190px;
+  top: 575px;
+  right: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.game-page__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 115px;
+}
+
+.screenshots {
+  background-color: lavender;
+  height: 150px;
+  margin: 30px 0px;
+}
+
+.desc-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-page__info.description {
+  background-color: thistle;
+  width: 60%;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-page__info.details {
+
+}

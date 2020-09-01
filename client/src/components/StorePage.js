@@ -18,20 +18,45 @@ function StorePage (props) {
         fetchData();
     }, []);
 
-    const gameCards = games.map((game) => <GameCard key={game.id} title={game.title} price={game.price} />);
+    const gameCards = games.map((game) => <GameCard key={game.id} id={game.id} title={game.title} price={game.price} />);
 
     return (
         <>
         <div className="divider"></div>
         <Container>
-            SEARCH BAR
-        </Container>
-        <Container className="store-container">
-            <div className="store-contianer__left">
-                Filters
+            <div>
+                SEARCH BAR
             </div>
-            <div className="store-container__right">
-                {gameCards}
+            <div>
+                tabs
+            </div>
+            <div className="store-container">
+                <div className="store-container__left">
+                    <span>Price</span>
+                    <ul>
+                        <li><input type="checkbox"></input>over $1</li>
+                        <li><input type="checkbox"></input>over $1</li>
+                        <li><input type="checkbox"></input>over $1</li>
+                        <li><input type="checkbox"></input>over $1</li>
+                        <li><input type="checkbox"></input>over $1</li>
+                    </ul>
+                    <br />
+                    <span>Features</span>
+                    <ul>
+                        <li><input type="checkbox"></input>achievements</li>
+                        <li><input type="checkbox"></input>achievements</li>
+                        <li><input type="checkbox"></input>achievements</li>
+                        <li><input type="checkbox"></input>achievements</li>
+                        <li><input type="checkbox"></input>achievements</li>
+                    </ul>
+                </div>
+                <div className="store-container__right">
+                    {gameCards}
+                    {gameCards}
+                    {gameCards}
+                    {gameCards}
+                    {gameCards}
+                </div>
             </div>
         </Container>
         </>
