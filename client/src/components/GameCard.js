@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { addToCart } from '../actions/cart';
+import { useDispatch } from 'react-redux';
+
 function GameCard ({ id, title, price }) {
     const [hovered, setHovered] = useState(false);
+    const dispatch = useDispatch();
+
+    const handleButtonClick = e => {
+        dispatch(addToCart(id))
+    }
 
     return (
         <Link to={"/game/" + id}>
@@ -20,7 +28,7 @@ function GameCard ({ id, title, price }) {
                         $ {price}
                     </div>
                     <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
-                        <button>cart icon</button>
+                        <button onClick={handleButtonClick}>cart icon</button>
                     </div>
                 </div>
             </div>

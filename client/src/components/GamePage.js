@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
+import { addToCart } from '../actions/cart';
 
 function GamePage (props) {
+  const dispatch = useDispatch();
 
   return (
     <>
