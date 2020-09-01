@@ -15,12 +15,11 @@ def login():
 
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-    print("EEEEMMMAAAAAIIIIL: ", email)
+
     if not email:
         return jsonify({"msg": "Missing email"}), 400
     if not password:
         return jsonify({"msg": "Missing password"}), 400
-    print("2 EEEEMMMAAAAAIIIIL: ", email)
 
     user = User.query.filter(User.email == email).first()
     if not user or not user.check_password(password):
@@ -28,7 +27,6 @@ def login():
 
     # login_user(user)
     access_token = create_access_token(identity=email)
-    print("ACCCESSSS TOOKEENNNN: ", access_token)
     user.session_token = access_token
     user_dict = {
       'id': user.id,
