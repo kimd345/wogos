@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './components/GameCard.css';
 import './components/StorePage.css';
+import './components/GamePage.css';
 import './components/NavigationHeader.css';
 import App from './App';
 import configureStore from './store';

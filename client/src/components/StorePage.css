@@ -1,15 +1,17 @@
 .store-container {
-    background-color: lavender;
+    /* background-color: lavender; */
     display: flex;
-    justify-content: space-evenly;
-    padding: 0px;
-    margin: 0px auto;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.store-container__left {
-
+.store-container__left > ul {
+    list-style: none;
+    padding: 0px;
 }
 
 .store-container__right {
-
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
+

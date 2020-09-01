@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from starter_app.models import User
+from flask import Blueprint, jsonify, request
+from starter_app.models import User, Game
 
 user_routes = Blueprint('users', __name__)
 
@@ -14,3 +14,16 @@ def index():
 def user(id):
     response = User.query.get(id)
     return response.to_dict()
+
+
+@user_routes.route('/<id>/cart', methods=['POST', 'DELETE'])
+def add_to_cart(id):
+    form = request.json
+    user = User.query.get(id)
+    game = Game.query.get(form['game_id'])
+    if request.method == 'POST':
+        user.cart_items.append(game)
+        db.session.commit()
+    elif request.method == 'DELETE':
+        user.cart_items.remove(game)
+        db.session.commit()
