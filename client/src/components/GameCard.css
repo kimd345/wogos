@@ -1,0 +1,49 @@
+.game-card {
+    margin: 0px 0px 24px 24px;
+    width: 255px;
+    height: 200px;
+    object-fit: contain;
+    background-color: pink;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.game-card:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.game-card__pic {
+    background-color: lightpink;
+    height: 115px;
+}
+
+.game-card__info,
+.game-card__info-hovered {
+    height: 85px;
+    padding: 38px 16px 0px 16px;
+    display: flex;
+}
+
+.game-card__info {
+    justify-content: space-between;
+}
+
+.game-card__info-hovered {
+    justify-content: flex-end;
+}
+
+.game-card__title {
+    font-size: 14px;
+    position: absolute;
+    max-width: 255px;
+    overflow-wrap: normal;
+    padding: 8px 16px 0px 16px;
+}
+
+.game-card__os {
+    margin: auto 0;
+}
+
+.game-card__buyblock {
+    margin: auto 0;
+    display: flex;
+}
