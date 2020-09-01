@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
 
 function Main (props) {
     const urls = ['https://media.rawg.io/media/games/713/713269608dc8f2f40f5a670a14b2de94.jpg',
@@ -18,19 +17,19 @@ function Main (props) {
         <>
         <div className="divider" />
         <Container>
-        <span>⭐️ Highlights</span>
+        <span>Highlights</span>
             <Carousel
                 activeIndex={index}
                 onSelect={handleSelect}
                 className="carousel">
                 <Carousel.Item className="carousel">
-                    <img src={urls[0]} />
+                    <img src={urls[0]} alt="featured game" />
                 </Carousel.Item>
                 <Carousel.Item className="carousel">
-                    <img src={urls[1]} />
+                    <img src={urls[1]} alt="featured game"/>
                 </Carousel.Item>
                 <Carousel.Item className="carousel">
-                    <img src={urls[2]} />
+                    <img src={urls[2]} alt="featured game"/>
                 </Carousel.Item>
             </Carousel>
         </Container>
