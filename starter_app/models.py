@@ -26,7 +26,7 @@ features = db.Table('games_features',
                     )
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -164,3 +164,17 @@ class Feature(db.Model):
             "id": self.id,
             "feature": self.feature
         }
+
+
+    @property
+    def password(self):
+        return self.hashed_password
+
+
+    @password.setter
+    def password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)

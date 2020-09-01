@@ -1,5 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, NavLink, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+
+import UserList from './components/UsersList';
+import Login from './components/Login';
 
 import { NavigationHeader } from './components/NavigationHeader'
 import Main from './components/Main';
@@ -13,6 +16,12 @@ function App() {
         <Switch>
             <Route path="/games">
                 <StorePage />
+            </Route>
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/users">
+                <UserList />
             </Route>
             <Route path="/">
                 <Main />
