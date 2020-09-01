@@ -3,9 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
+import { useSelector } from 'react-redux';
 
 export function NavigationHeader (props) {
-    const cart = ["temp"];
+    const cart = useSelector(state => state.cart)
 
     return (
         <>
@@ -29,8 +30,8 @@ export function NavigationHeader (props) {
                 <div className="navbar__right">
                     <Link to="/checkout">
                         <div className="navbar__items">
-                            cart icon
-                            <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div>
+                            {Object.keys(cart.items).length}
+                            {/* <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div> */}
                         </div>
                     </Link>
                     <div className="navbar__items search">search icon</div>

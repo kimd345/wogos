@@ -1,7 +1,6 @@
 import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  LOAD_CART
+  LOAD_USER_CART,
+  ADD_TO_CART
 } from '../actions/cart'
 
 const cartReducer = (state = { items: {} }, action) => {
@@ -10,26 +9,23 @@ const cartReducer = (state = { items: {} }, action) => {
       return {
         ...state,
         items: {
+          ...state.items,
           [action.item.id]: action.item
         }
       }
     }
 
-    case REMOVE_FROM_CART: {
+    case LOAD_USER_CART: {
       return {
-        ...state
-
-      }
-    }
-
-    case LOAD_CART: {
-      return {
-        ...state
+        ...state,
+        cart: action.cart_items
       }
     }
 
     default: return state;
   }
 }
+
+
 
 export default cartReducer;
