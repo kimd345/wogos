@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 
 import UserList from './components/UsersList';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 import { NavigationHeader } from './components/NavigationHeader'
 import Main from './components/Main';
@@ -19,6 +20,9 @@ function App() {
             </Route>
             <Route path="/login">
                 <Login />
+            </Route>
+            <Route path="/signup">
+                <SignUp />
             </Route>
             <Route path="/users">
                 <UserList />

@@ -36,14 +36,32 @@ export const loadUser = () => async dispatch => {
 
 export const login = (email, password) => async dispatch => {
   const response = await fetch(`${apiUrl}/session`, {
-    method: 'POST',
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
 
   if (response.ok) {
     const { token, user } = await response.json();
-    console.log('HEEEEEEYYYYYYYYY: ', token, user)
+    window.localStorage.setItem(TOKEN_KEY, token);
+    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+    dispatch(setToken(token));
+    dispatch(setUser(user));
+  } else {
+    const msg = await response.json();
+    console.log(msg);
+  }
+};
+
+export const signup = (username, email, password) => async dispatch => {
+  const response = await fetch(`${apiUrl}/session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email, password }),
+  });
+
+  if (response.ok) {
+    const { token, user } = await response.json();
     window.localStorage.setItem(TOKEN_KEY, token);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
     dispatch(setToken(token));
