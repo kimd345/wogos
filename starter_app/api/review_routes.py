@@ -7,7 +7,7 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        form = request.form
+        form = request.json
         review = Review(user_id=form['user_id'], game_id=form['game_id'], title=form['title'], body=form['body'], star_rating=form['star_rating'])  # noqa
         db.session.add(review)
         db.session.commit()

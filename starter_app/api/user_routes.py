@@ -18,7 +18,7 @@ def user(id):
 
 @user_routes.route('/<id>/cart', methods=['POST', 'DELETE'])
 def add_to_cart(id):
-    form = request.form
+    form = request.json
     user = User.query.get(id)
     game = Game.query.get(form['game_id'])
     if request.method == 'POST':

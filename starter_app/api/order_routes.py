@@ -7,7 +7,7 @@ order_routes = Blueprint('orders', __name__)
 @order_routes.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        form = request.form
+        form = request.json
         order = Order(
             user_id=form['user_id'], game_id=form['game_id'], price_paid=form['price_paid'])  # noqa
         db.session.add(order)
