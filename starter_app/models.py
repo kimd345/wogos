@@ -84,10 +84,11 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(200))
     price = db.Column(db.Float, nullable=False)
     sale = db.Column(db.Integer, nullable=True)
     description = db.Column(db.Text)
-    requirements = db.Column(db.String(250))
+    requirements = db.Column(db.Text)
 
     orders = db.relationship('Order', backref='game')
     reviews = db.relationship('Review', backref='game')
@@ -101,7 +102,8 @@ class Game(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "price": self.check_sale(),
+            "price": '{:.2f}'.format(round(self.check_sale(), 2)),
+            "image_url": self.image_url,
             "sale": self.sale,
             "description": self.description,
             "requirements": self.requirements,
