@@ -15,6 +15,7 @@ wtforms = "*"
 flask-wtf = "*"
 flask-login = "*"
 flask-cors = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.8"

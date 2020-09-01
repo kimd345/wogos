@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
-
-import { apiUrl } from '../config';
+import { useDispatch } from 'react-redux';
+import { login } from '../actions/auth';
 
 function Login() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = e => {
-        async function postData(data) {
-            const response = await fetch(`${apiUrl}/session`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            return response.json();
-        }
-        postData({ email, password });
         e.preventDefault();
-    }
+        dispatch(login(email, password));
+    };
 
-    return(
+    return (
         <main>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{padding:'100px'}}>
                 <input 
                     placeholder='Email' 
                     value={email}
