@@ -29,5 +29,18 @@
 }
 
 .navbar__items:not(.search) {
+    display: flex;
     margin: 0px 15px 0px 0px;
+}
+
+.navbar__cart {
+    font-size: 10px;
+    align-self: center;
+    padding: 0 4px;
+}
+
+.green {
+    color: white;
+    border-radius: 2px;
+    background-color: #80AC02;
 }

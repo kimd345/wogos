@@ -6,16 +6,10 @@ import Container from 'react-bootstrap/esm/Container';
 
 function NavbarCart (props) {
 
-    return (
-        <div className="navbar__cart-dropdown">
-            ITEMS IN CART
-        </div>
-    )
 }
 
 export function NavigationHeader (props) {
-    const [cartDisplay, setCartDisplay] = useState(false);
-
+    const [cart, setCart] = useState(["dsfa"]);
 
     return (
         <>
@@ -37,7 +31,10 @@ export function NavigationHeader (props) {
                     </>
                 </div>
                 <div className="navbar__right">
-                    <div className="navbar__items">🛒 <span>0</span></div>
+                    <div className="navbar__items">
+                        🛒
+                        <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div>
+                    </div>
                     <div className="navbar__items search">🔍</div>
                 </div>
             </Container>

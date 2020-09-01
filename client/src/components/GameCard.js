@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function GameCard (props) {
+function GameCard ({ title, price }) {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -12,12 +12,12 @@ function GameCard (props) {
             <div className="game-card__pic">
                 
             </div>
-            <div className="game-card__title">Divinity: Original Sin 2 - Definitive Edition</div>
+            <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
                 <div className={hovered ? "game-card__os hidden" : "game-card__os"}>🖥</div>
                 <div className="game-card__buyblock">
                     <div className="game-card__buyblock-price">
-                        $9.99
+                        {price}
                     </div>
                     <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
                         <button>🛒</button>

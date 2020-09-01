@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { apiUrl } from '../config'
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import GameCard from './GameCard'
 
 function StorePage (props) {
+    const [games, setGames] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(apiUrl + '/games');
+            const responseData = await response.json();
+            setGames(responseData.games)
+        }
+        fetchData();
+    }, []);
+
+    const gameCards = games.map((game) => <GameCard key={game.id} title={game.title} price={game.price} />);
 
     return (
         <>
@@ -19,15 +31,7 @@ function StorePage (props) {
                 Filters
             </div>
             <div className="store-container__right">
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
-                <GameCard />
+                {gameCards}
             </div>
         </Container>
         </>
