@@ -27,10 +27,12 @@ export function NavigationHeader (props) {
                     </>
                 </div>
                 <div className="navbar__right">
-                    <div className="navbar__items">
-                        cart icon
-                        <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div>
-                    </div>
+                    <Link to="/checkout">
+                        <div className="navbar__items">
+                            cart icon
+                            <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div>
+                        </div>
+                    </Link>
                     <div className="navbar__items search">search icon</div>
                 </div>
             </Container>
