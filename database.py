@@ -23,43 +23,12 @@ with app.app_context():
     alissa = User(username='Alissa', email='alissa@aa.io',
                   hashed_password='auhgdfiaufhggasrgargarg')
 
-    order1 = Order(user_id=1, game_id=1, price_paid=19.99)
-    order2 = Order(user_id=2, game_id=1, price_paid=19.99)
-    order3 = Order(user_id=3, game_id=2, price_paid=59.99)
-
-    review1 = Review(user_id=1, game_id=1, title="MUST BUY", body="This is a must have game this summer", star_rating=4)  # noqa
-    review2 = Review(user_id=3, game_id=2, title="meh its alright", body="i think the graphics could have been better", star_rating=2)  # noqa
-
-    third_person = Feature(feature='Third Person Camera')
-    looter_shooter = Feature(feature='Looter Shooter')
-    casual = Feature(feature='Filthy Casual')
-
-    # db.session.add(ian)
-    # db.session.add(javier)
-    # db.session.add(dean)
-    # db.session.add(angela)
-    # db.session.add(soonmi)
-    # db.session.add(alissa)
-
-    # db.session.add(order1)
-    # db.session.add(order2)
-    # db.session.add(order3)
-
-    # db.session.add(game1)
-    # db.session.add(game2)
-
-    # db.session.add(review1)
-    # db.session.add(review2)
-
-    # db.session.add(fps)
-    # db.session.add(rpg)
-    # db.session.add(mmo)
-
-    # db.session.add(casual)
-    # db.session.add(looter_shooter)
-    # db.session.add(casual)
-
-    # db.session.commit()
+    db.session.add(ian)
+    db.session.add(javier)
+    db.session.add(dean)
+    db.session.add(angela)
+    db.session.add(soonmi)
+    db.session.add(alissa)
 
     def get_games(pages):
         games = get_game_ids(pages)
@@ -88,7 +57,7 @@ with app.app_context():
             'description': item['description'],
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
-            'requirements': req['minimum'] if req else 'This game will run on any modern computer'
+            'requirements': req['minimum'] if req else 'This game will run on any modern computer'  # noqa
         }
 
     def get_genres():
