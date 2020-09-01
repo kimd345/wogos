@@ -9,6 +9,8 @@ from starter_app.models import db, User
 from starter_app.api.session import session
 from starter_app.api.user_routes import user_routes
 from starter_app.api.game_routes import game_routes
+from starter_app.api.review_routes import review_routes
+from starter_app.api.genre_routes import genre_routes
 
 from starter_app.config import Config
 
@@ -20,6 +22,8 @@ app.config.from_object(Config)
 app.register_blueprint(session, url_prefix='/api/session')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(game_routes, url_prefix='/api/games')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
+app.register_blueprint(genre_routes, url_prefix='/api/genres')
 db.init_app(app)
 login = LoginManager(app)
 login.login_view = "session.login"

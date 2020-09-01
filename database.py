@@ -1,12 +1,10 @@
+from werkzeug.security import generate_password_hash
 from starter_app.models import User, Order, Game, Review, Genre, Feature
 from starter_app import app, db
 from dotenv import load_dotenv
 import requests
 import random
 load_dotenv()
-
-from werkzeug.security import generate_password_hash
-
 
 with app.app_context():
     db.drop_all()
@@ -39,7 +37,7 @@ with app.app_context():
         return [(Game(title=game[0]['title'], image_url=game[0]['image_url'], price=game[0]['price'], sale=game[0]['sale'], description=game[0]['description'], requirements=game[0]['requirements']), game[-1]) for game in data]  # noqa
 
     def get_game_ids(pages):
-        url = 'https://api.rawg.io/api/games?dates=2015-10-10,2020-10-10&platforms=4&page_size=40&page='
+        url = 'https://api.rawg.io/api/games?dates=2015-10-10,2020-10-10&platforms=4&page_size=40&page='  # noqa
         results = []
         count = 1
         while count <= pages:
