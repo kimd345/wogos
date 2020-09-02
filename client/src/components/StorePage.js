@@ -26,14 +26,6 @@ function StorePage (props) {
         <div className="divider"></div>
         <Container>
             <div>
-                {/* TODO: style and format, purely to test functionality */}
-                control page #
-                <Pagination>
-                    <Pagination.Item onClick={() => setPageNum(0)}>default page</Pagination.Item>
-                    <Pagination.Item onClick={() => setPageNum(1)}>page 2</Pagination.Item>
-                </Pagination>
-            </div>
-            <div>
                 SEARCH BAR
             </div>
             <div>
@@ -61,6 +53,10 @@ function StorePage (props) {
                 </div>
                 <div className="store-container__right">
                     {gameCards}
+                    <Pagination className="store__pagination">
+                        <Pagination.Item onClick={() => setPageNum(0)}>default page</Pagination.Item>
+                        <Pagination.Item onClick={() => setPageNum(1)}>page 2</Pagination.Item>
+                    </Pagination>
                 </div>
             </div>
         </Container>

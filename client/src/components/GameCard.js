@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addToCart } from '../actions/cart';
-import { useDispatch, useSelector } from 'react-redux';
+
+import Button from 'react-bootstrap/Button'
 
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
-// formatter.format(2500); /* $2,500.00 */
 
 function GameCard ({ game }) {
     const dispatch = useDispatch();
@@ -17,7 +18,9 @@ function GameCard ({ game }) {
 
     const { id, title, price, sale, image_url } = game;
 
-    const cart = useSelector(state => state.cart.cart);
+    const cart = useSelector(state => state.cart.items);
+
+    const inCart = cart[id] != undefined;
 
     const handleButtonClick = e => {
         dispatch(addToCart(id))
@@ -27,15 +30,27 @@ function GameCard ({ game }) {
         <>
         <div className="game-card"
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}>
+            onMouseLeave={() => setHovered(false)}
+        >
             <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
-                <button onClick={handleButtonClick}>+</button>
+                <Button
+                    disabled={inCart}
+                    size="sm"
+                    variant="success"
+                    onClick={handleButtonClick}>
+                        {inCart ? "✓" : "✚"}
+                    </Button>
+            </div>
+            <div className={inCart ? "game-card__flag cart" : "game-card__flag cart hidden"}>
+                {inCart ? "IN CART" : ""}
             </div>
             <Link to={"/game/" + id}>
             <div className="game-card__pic" style={{ backgroundImage: `url(${image_url})` }}/>
             <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
-                <div className={hovered ? "game-card__os hidden" : "game-card__os"}>windows icon</div>
+                <div className={hovered ? "game-card__os hidden" : "game-card__os"}>
+                    W
+                </div>
                 <div className="game-card__buyblock">
                     <div className="game-card__buyblock-price"
                         style={hovered ? { marginRight: "30px" } : {}}>
