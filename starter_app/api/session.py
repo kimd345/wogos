@@ -4,32 +4,50 @@ from flask_jwt_extended import (
 )
 from flask_login import current_user, login_user, logout_user
 
-from starter_app.models import User
+from starter_app.models import db, User
 
 session = Blueprint('session', __name__)
 
-@session.route('', methods=['POST'])
-def login():
+@session.route('', methods=['PUT', 'POST', 'DELETE'])
+def auth():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
+    if request.method == 'DELETE':
+        print('@@@@@@@@@@@@@@@@', request.data)  # need to delete session token from user
+        id = request.json.get('userId', None)
+        user = User.query.filter(User.id == id).first()
+        user.session_token = None
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({"msg": "Session token removed"}), 200
+
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-    print("EEEEMMMAAAAAIIIIL: ", email)
+
     if not email:
         return jsonify({"msg": "Missing email"}), 400
     if not password:
         return jsonify({"msg": "Missing password"}), 400
-    print("2 EEEEMMMAAAAAIIIIL: ", email)
 
-    user = User.query.filter(User.email == email).first()
-    if not user or not user.check_password(password):
-        return jsonify({"msg": "Missing password"}), 401
+    if request.method == 'POST':
+        username = request.json.get('username', None)
+        if not username:
+            return jsonify({"msg": "Missing username"}), 400
 
-    # login_user(user)
+    if request.method == 'PUT':
+        user = User.query.filter(User.email == email).first()
+        if not user or not user.check_password(password):
+            return jsonify({"msg": "Missing password"}), 401
+    elif request.method == 'POST':
+        user = User(username=username, email=email)
+        user.password = password
+
     access_token = create_access_token(identity=email)
-    print("ACCCESSSS TOOKEENNNN: ", access_token)
     user.session_token = access_token
+    db.session.add(user)
+    db.session.commit()
+
     user_dict = {
       'id': user.id,
       'username': user.username,
