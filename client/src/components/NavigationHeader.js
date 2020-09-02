@@ -1,15 +1,12 @@
-import React, { useState }from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
-
-function NavbarCart (props) {
-
-}
+import { useSelector } from 'react-redux';
 
 export function NavigationHeader (props) {
-    const [cart, setCart] = useState(["dsfa"]);
+    const cart = useSelector(state => state.cart)
 
     return (
         <>
@@ -31,11 +28,13 @@ export function NavigationHeader (props) {
                     </>
                 </div>
                 <div className="navbar__right">
-                    <div className="navbar__items">
-                        🛒
-                        <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div>
-                    </div>
-                    <div className="navbar__items search">🔍</div>
+                    <Link to="/checkout">
+                        <div className="navbar__items">
+                            {Object.keys(cart.items).length}
+                            {/* <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div> */}
+                        </div>
+                    </Link>
+                    <div className="navbar__items search">search icon</div>
                 </div>
             </Container>
         </div>

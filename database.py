@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash
 from starter_app.models import User, Order, Game, Review, Genre, Feature
+from bs4 import BeautifulSoup
 from starter_app import app, db
 from dotenv import load_dotenv
 import requests
@@ -32,9 +33,9 @@ with app.app_context():
 
     def get_games(pages):
         games = get_game_ids(pages)
-        data = [(get_game_details(game['id']), game['genres'])
+        data = [(get_game_details(game['id']), game['tags'], game['genres'])
                 for game in games]
-        return [(Game(title=game[0]['title'], image_url=game[0]['image_url'], price=game[0]['price'], sale=game[0]['sale'], description=game[0]['description'], requirements=game[0]['requirements']), game[-1]) for game in data]  # noqa
+        return [(Game(title=game[0]['title'], image_url=game[0]['image_url'], price=game[0]['price'], sale=game[0]['sale'], description=game[0]['description'], requirements=game[0]['requirements']), game[1], game[-1]) for game in data]  # noqa
 
     def get_game_ids(pages):
         url = 'https://api.rawg.io/api/games?dates=2015-10-10,2020-10-10&platforms=4&page_size=40&page='  # noqa
@@ -43,7 +44,9 @@ with app.app_context():
         while count <= pages:
             response = requests.get(url + str(count))
             games = response.json()
-            results += [{'id': result['id'], 'genres': result['genres']}
+            results += [{'id': result['id'],
+                         'genres': result['genres'],
+                         'tags': result['tags']}
                         for result in games['results']]
             count += 1
         return results
@@ -51,14 +54,22 @@ with app.app_context():
     def build_dict(item):
         req = [platform['requirements']
                for platform in item['platforms'] if platform['platform']['id'] is 4][0]  # noqa
+        desc = BeautifulSoup(item['description'], 'html.parser')
+        req = req['minimum'] if req else 'This game will run on any modern computer'  # noqa
+        req_soup = BeautifulSoup(req, 'html.parser')
         return {
             'title': item['name'],
             'image_url': item['background_image'],
-            'description': item['description'],
+            'description': desc.get_text(),
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
-            'requirements': req['minimum'] if req else 'This game will run on any modern computer'  # noqa
+            'requirements':  req_soup.get_text()  # noqa
         }
+
+    def get_features():
+        res = requests.get('https://api.rawg.io/api/tags')
+        features = res.json()
+        return [Feature(feature=result['name']) for result in features['results']]  # noqa
 
     def get_genres():
         response = requests.get('https://api.rawg.io/api/genres')
@@ -71,6 +82,14 @@ with app.app_context():
         data = res.json()
         return build_dict(data)
 
+    def configure_features(features, els):
+        for feature in features:
+            feat = feature.to_dict()
+            for el in els:
+                for n in el[1]:
+                    if feat['feature'] == n['name']:
+                        el[0].features.append(feature)
+
     def configure_genres(genres, els):
         for genre in genres:
             g = genre.to_dict()
@@ -81,6 +100,7 @@ with app.app_context():
 
     game_tups = get_games(1)
     configure_genres(get_genres(), game_tups)
+    configure_features(get_features(), game_tups)
     games = [game[0] for game in game_tups]
     db.session.add_all(games)
     db.session.commit()
