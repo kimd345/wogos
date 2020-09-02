@@ -17,15 +17,18 @@ def user(id):
 
 
 @user_routes.route('/<id>/cart', methods=['GET', 'POST', 'DELETE'])
-def add_to_cart(id):
-    form = request.json
+def cart(id):
     user = User.query.get(id)
-    game = Game.query.get(form['game_id'])
-    if request.method == 'POST':
-        user.cart_items.append(game)
-        db.session.commit()
-        return game.to_dict()
-    elif request.method == 'DELETE':
-        user.cart_items.remove(game)
-        db.session.commit()
-        return game.to_dict()
+    if request.method == 'GET':
+        return {'games': [{'id': game.id, 'image_url': game.image_url, 'title': game.title, 'price': game.price, 'sale': game.sale} for game in user.cart_items]}  # noqa
+    else:
+        form = request.json
+        game = Game.query.get(form['game_id'])
+        if request.method == 'POST':
+            user.cart_items.append(game)
+            db.session.commit()
+            return game.to_dict()
+        elif request.method == 'DELETE':
+            user.cart_items.remove(game)
+            db.session.commit()
+            return game.to_dict()

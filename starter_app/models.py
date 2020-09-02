@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(100), nullable=False)
-    session_token = db.Column(db.String(100))
+    session_token = db.Column(db.String(500))
 
     orders = db.relationship("Order", backref='user')
     reviews = db.relationship('Review', backref='user')
@@ -57,7 +57,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "orders": [order.to_dict() for order in self.orders],
-            "reviews": [review.to_dict() for review in self.reviews],  # noqa
+            "reviews": [review.to_dict() for review in self.reviews],
             "cart_items": [game.to_dict() for game in self.cart_items]
         }
 
@@ -166,17 +166,3 @@ class Feature(db.Model):
             "id": self.id,
             "feature": self.feature
         }
-
-
-    @property
-    def password(self):
-        return self.hashed_password
-
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
