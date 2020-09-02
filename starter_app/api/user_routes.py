@@ -20,7 +20,7 @@ def user(id):
 def cart(id):
     user = User.query.get(id)
     if request.method == 'GET':
-        return {'games': [{'id': game.id, 'image_url': game.image_url, 'title': game.title, 'price': game.price, 'sale': game.sale} for game in user.cart_items]}  # noqa
+        return {'games': [{'id': game.id, 'image_url': game.image_url, 'title': game.title, 'price': game.check_sale(), 'sale': game.sale} for game in user.cart_items]}  # noqa
     else:
         form = request.json
         game = Game.query.get(form['game_id'])

@@ -102,7 +102,7 @@ class Game(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "price": '{:.2f}'.format(round(self.check_sale(), 2)),
+            "price": self.check_sale(),
             "image_url": self.image_url,
             "sale": self.sale,
             "description": self.description,
@@ -115,7 +115,7 @@ class Game(db.Model):
 
     def check_sale(self):
         price = self.price if self.sale is None \
-            else self.price * (self.sale / 100)
+            else '{:.2f}'.format(round((self.price * (self.sale / 100)), 2))
         return price
 
 
