@@ -57,7 +57,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "orders": [order.to_dict() for order in self.orders],
-            "reviews": [review.to_dict() for review in self.reviews],  # noqa
+            "reviews": [review.to_dict() for review in self.reviews],
             "cart_items": [game.to_dict() for game in self.cart_items]
         }
 
@@ -166,17 +166,3 @@ class Feature(db.Model):
             "id": self.id,
             "feature": self.feature
         }
-
-
-    @property
-    def password(self):
-        return self.hashed_password
-
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
