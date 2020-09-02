@@ -5,6 +5,7 @@ const USER_KEY = 'gog/auth/user';
 export const SET_TOKEN = 'SET_TOKEN';
 export const REMOVE_TOKEN = 'REMOVE_TOKEN';
 export const SET_USER = 'SET_USER';
+export const REMOVE_USER = 'REMOVE_USER';
 
 export const setToken = token => ({
   type: SET_TOKEN,
@@ -18,6 +19,10 @@ export const removeToken = () => ({
 export const setUser = user => ({
   type: SET_USER,
   user,
+});
+
+export const removeUser = () => ({
+  type: REMOVE_USER,
 });
 
 export const loadToken = () => async dispatch => {
@@ -73,15 +78,16 @@ export const signup = (username, email, password) => async dispatch => {
 };
 
 export const logout = userId => async (dispatch, getState) => {
-  const { authentication: { token } } = getState();
   const response = await fetch(`${apiUrl}/session`, {
     method: 'DELETE',
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ userId }),
   });
 
   if (response.ok) {
     window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.removeItem(USER_KEY);
     dispatch(removeToken());
+    dispatch(removeUser());
   }
 };

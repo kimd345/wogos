@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import UserList from './components/UsersList';
 import Login from './components/Login';
@@ -11,7 +12,30 @@ import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
 
+import { loadToken, loadUser } from './actions/auth';
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        rest.needLogin === true
+            ? <Redirect to='/login' />
+            : <Component {...props} />
+    )} />
+)
+
 function App() {
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
+    const needLogin = useSelector(state => !state.auth.token);
+
+    useEffect(() => {
+        setLoaded(true);
+        dispatch(loadToken());
+        dispatch(loadUser());
+    }, [dispatch]);
+
+    if (!loaded) {
+        return null;
+    }
 
   return (
     <BrowserRouter>
@@ -26,6 +50,7 @@ function App() {
             <Route path="/checkout">
                 <CheckoutPage />
             </Route>
+            {/* <PrivateRoute path='/checkout' needLogin={needLogin} component={CheckoutPage} /> */}      
             <Route path="/login">
                 <Login />
             </Route>

@@ -2,16 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/auth';
 
-function Logout(props) {
+function Logout() {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.auth.user.id);
 
-  const handleLogout = userId => {
+  const handleLogout = e => {
     dispatch(logout(userId));
   };
 
   return (
-    <button onClick={handleLogout(userId)}>Log Out</button>
+    <button onClick={handleLogout}>Log Out</button>
   );
 };
 

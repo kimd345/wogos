@@ -8,41 +8,19 @@ from starter_app.models import db, User
 
 session = Blueprint('session', __name__)
 
-# @session.route('', methods=['PUT'])
-# def login():
-#     if not request.is_json:
-#         return jsonify({"msg": "Missing JSON in request"}), 400
-
-#     email = request.json.get('email', None)
-#     password = request.json.get('password', None)
-
-#     if not email:
-#         return jsonify({"msg": "Missing email"}), 400
-#     if not password:
-#         return jsonify({"msg": "Missing password"}), 400
-
-#     user = User.query.filter(User.email == email).first()
-#     if not user or not user.check_password(password):
-#         return jsonify({"msg": "Missing password"}), 401
-
-#     access_token = create_access_token(identity=email)
-#     user.session_token = access_token
-#     user_dict = {
-#       'id': user.id,
-#       'username': user.username,
-#       'email': user.email,
-#       'hashed_password': user.hashed_password,
-#       'session_token': user.session_token,
-#       }
-#     return jsonify({'user': user_dict, 'token': access_token}), 200
-
 @session.route('', methods=['PUT', 'POST', 'DELETE'])
 def auth():
-    if request.method == 'DELETE':
-        print(request)  # need to delete session token from user
-
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
+
+    if request.method == 'DELETE':
+        print('@@@@@@@@@@@@@@@@', request.data)  # need to delete session token from user
+        id = request.json.get('userId', None)
+        user = User.query.filter(User.id == id).first()
+        user.session_token = None
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({"msg": "Session token removed"}), 200
 
     email = request.json.get('email', None)
     password = request.json.get('password', None)
@@ -64,11 +42,11 @@ def auth():
     elif request.method == 'POST':
         user = User(username=username, email=email)
         user.password = password
-        db.session.add(user)
-        db.session.commit()
 
     access_token = create_access_token(identity=email)
     user.session_token = access_token
+    db.session.add(user)
+    db.session.commit()
 
     user_dict = {
       'id': user.id,
