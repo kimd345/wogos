@@ -14,3 +14,9 @@ def index():
 def game(id):
     response = Game.query.get(id)
     return response.to_dict()
+
+
+@game_routes.route('/page/<pid>')
+def games(pid):
+    res = Game.query.offset((int(pid) * 24)).limit(24)
+    return {'games': [game.to_dict() for game in res]}
