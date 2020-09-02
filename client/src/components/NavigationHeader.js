@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
-import { useSelector } from 'react-redux';
-
 
 export function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
@@ -31,7 +29,7 @@ export function NavigationHeader (props) {
                 <div className="navbar__right">
                     <Link to="/checkout">
                         <div className="navbar__items">
-                            🛒
+                            cart
                             <div className={cartAmount > 0 ? "navbar__cart green" : "navbar__cart"}> {cartAmount}</div>
                         </div>
                     </Link>

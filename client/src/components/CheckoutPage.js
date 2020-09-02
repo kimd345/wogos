@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadCart, removeFromCart } from '../actions/cart';
+import { removeFromCart } from '../actions/cart';
 
 import Container from 'react-bootstrap/Container'
+
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+// formatter.format(2500); /* $2,500.00 */
 
 function CartItem ({ item }) {
   const { id, image_url, title, price, sale } = item;
@@ -24,7 +30,7 @@ function CartItem ({ item }) {
             ?
             <div>
               <strike>${price}</strike><br/>
-              <span>${price - price * (sale / 100)}</span>
+              <span>{formatter.format(price - price * (sale / 100))}</span>
             </div>
             :
               <span>${price}</span>

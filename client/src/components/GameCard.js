@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 import { addToCart } from '../actions/cart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,6 @@ var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
-
 // formatter.format(2500); /* $2,500.00 */
 
 function GameCard ({ game }) {
@@ -26,7 +25,7 @@ function GameCard ({ game }) {
 
     return (
         <>
-        {/* <Link to={"/game/" + id}> */}
+        <Link to={"/game/" + id}>
         <div className="game-card"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
@@ -59,7 +58,7 @@ function GameCard ({ game }) {
                 </div>
             </div>
         </div>
-        {/* </Link> */}
+        </Link>
         </>
     )
 }
