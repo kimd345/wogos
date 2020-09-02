@@ -12,6 +12,7 @@ from starter_app.api.game_routes import game_routes
 from starter_app.api.review_routes import review_routes
 from starter_app.api.genre_routes import genre_routes
 from starter_app.api.order_routes import order_routes
+from starter_app.api.feature_routes import feature_routes
 
 from starter_app.config import Config
 
@@ -26,6 +27,7 @@ app.register_blueprint(game_routes, url_prefix='/api/games')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(genre_routes, url_prefix='/api/genres')
 app.register_blueprint(order_routes, url_prefix='/api/orders')
+app.register_blueprint(feature_routes, url_prefix='/api/features')
 db.init_app(app)
 login = LoginManager(app)
 login.login_view = "session.login"

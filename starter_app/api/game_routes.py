@@ -6,7 +6,7 @@ game_routes = Blueprint('games', __name__)
 
 @game_routes.route('/')
 def index():
-    response = Game.query.all()
+    response = Game.query.all().limit(24)
     return {'games': [game.to_dict() for game in response]}
 
 
