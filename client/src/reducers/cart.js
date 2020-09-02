@@ -1,6 +1,7 @@
 import {
-  LOAD_USER_CART,
-  ADD_TO_CART
+  LOAD_CART,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
 } from '../actions/cart'
 
 const cartReducer = (state = { items: {} }, action) => {
@@ -8,17 +9,23 @@ const cartReducer = (state = { items: {} }, action) => {
     case ADD_TO_CART: {
       return {
         ...state,
-        items: {
-          ...state.items,
-          [action.item.id]: action.item
-        }
+        [action.item.id]: action.item
       }
     }
 
-    case LOAD_USER_CART: {
+    case REMOVE_FROM_CART: {
+      // console.log(state.items[action.id])
+      delete state.items[action.id]
+      // console.log(state.items[action.id])
       return {
         ...state,
-        cart: action.cart_items
+      }
+    }
+
+    case LOAD_CART: {
+      return {
+        ...state,
+        items: action.cart
       }
     }
 

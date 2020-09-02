@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from 'react';
-
-import { apiUrl } from '../config'
+import { useSelector, useDispatch } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
+import Pagination from 'react-bootstrap/Pagination'
 
 import GameCard from './GameCard'
 
+import { loadDefaultGames, loadGamesPage } from '../actions/games'
+
 function StorePage (props) {
-    const [games, setGames] = useState([]);
+    const [pageNum, setPageNum] = useState(0);
+    const games = useSelector(state => state.games.current_games)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch(apiUrl + '/games');
-            const responseData = await response.json();
-            setGames(responseData.games)
-        }
-        fetchData();
-    }, []);
+        if (pageNum === 0) dispatch(loadDefaultGames())
+        else dispatch(loadGamesPage(pageNum))
+    }, [pageNum])
 
-    const gameCards = games.map((game) => <GameCard key={game.id} id={game.id} title={game.title} price={game.price} />);
+    const gameCards = Object.values(games).map((game) => 
+        <GameCard key={game.id} game={game} />);
 
     return (
         <>
         <div className="divider"></div>
         <Container>
+            <div>
+                {/* TODO: style and format, purely to test functionality */}
+                control page #
+                <Pagination>
+                    <Pagination.Item onClick={() => setPageNum(0)}>default page</Pagination.Item>
+                    <Pagination.Item onClick={() => setPageNum(1)}>page 2</Pagination.Item>
+                </Pagination>
+            </div>
             <div>
                 SEARCH BAR
             </div>
@@ -51,10 +60,6 @@ function StorePage (props) {
                     </ul>
                 </div>
                 <div className="store-container__right">
-                    {gameCards}
-                    {gameCards}
-                    {gameCards}
-                    {gameCards}
                     {gameCards}
                 </div>
             </div>
