@@ -63,7 +63,7 @@ with app.app_context():
             'description': desc.get_text(),
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
-            'requirements':  req_soup.get_text()  # noqa
+            'requirements':  req_soup.get_text()
         }
 
     def get_features():

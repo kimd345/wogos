@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(100), nullable=False)
-    session_token = db.Column(db.String(100))
+    session_token = db.Column(db.String(500))
 
     orders = db.relationship("Order", backref='user')
     reviews = db.relationship('Review', backref='user')
