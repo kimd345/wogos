@@ -1,17 +1,49 @@
 .checkout__container {
   display: flex;
   justify-content: space-between;
+  margin-top: 30px;
 }
 
-.checkout__game-card {
+.checkout__games > span,
+.checkout__payment-sidebar > span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkout__game-card,
+.checkout__order-total {
   display: flex;
   width: 600px;
   height: 60px;
   background-color: whitesmoke;
+  border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 .checkout__game-card__info {
+  font-size: 14px;
   display: flex;
   width: 500px;
   justify-content: space-between;
+  padding: 5px 8px;
+  align-content: center;
+}
+
+.checkout__game-card__buttons > button {
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 2px;
+}
+
+.checkout__game-card__price {
+  margin-right: 10px;
+  text-align: right;
+}
+
+.checkout__order-total {
+  margin-right: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-end;
+  text-align: right;
+  font-size: 14px;
 }

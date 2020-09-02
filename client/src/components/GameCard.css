@@ -1,4 +1,5 @@
 .game-card {
+    position: relative;
     margin: 0px 0px 24px 24px;
     width: 255px;
     height: 200px;
@@ -49,11 +50,20 @@
 }
 
 .game-card__buyblock-button {
-    margin-left: 10px;
+    position: absolute;
+    top: 160px;
+    right: 10px;
+}
+
+.game-card__buyblock-price {
+    text-align: right;
+    line-height: .9rem;
+    height: 30px;
 }
 
 .game-card__pricetag,
 .game-card__pricetag--sale {
+    margin-bottom: 5px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -66,4 +76,19 @@
     padding: 5px;
     background-color: purple;
     margin-right: 10px;
+}
+
+.game-card__flag {
+    position: absolute;
+    font-size: 10px;
+    padding: 3px 10px;
+    top: 103px;
+    color: white;
+    text-align: center;
+}
+
+.game-card__flag.cart {
+    background-color: mediumturquoise;
+    width: 90px;
+    border-radius: 0 3px 3px 0;
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Container from 'react-bootstrap/esm/Container';
 import Logout from './Logout';
 
-export function NavigationHeader (props) {
+function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
     const loggedIn = useSelector(state => Object.keys(state.auth).length !== 0);
 
@@ -44,3 +44,5 @@ export function NavigationHeader (props) {
         </>
     )
 }
+
+export default NavigationHeader;

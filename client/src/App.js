@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import UserList from './components/UsersList';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 
-import { NavigationHeader } from './components/NavigationHeader'
+import NavigationHeader from './components/NavigationHeader'
 import Main from './components/Main';
 import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
 
 import { loadCart } from './actions/cart'
-
 import { loadToken, loadUser } from './actions/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -23,6 +22,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             : <Component {...props} />
     )} />
 )
+
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scroll(0,0)
+    }, [pathname]);
+
+    return null;
+}
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -42,6 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
+        <ScrollToTop />
         <NavigationHeader />
         <Switch>
             <Route path="/game/:id">
