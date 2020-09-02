@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
+import Logout from './Logout';
 
 export function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
+    const loggedIn = useSelector(state => Object.keys(state.auth).length !== 0);
 
     return (
         <>
@@ -22,9 +24,10 @@ export function NavigationHeader (props) {
                     <Link to="/about">
                         <div className="navbar__items">ABOUT</div>
                     </Link>
-                    <> 
+                    <Link to="/login">
                         <div className="navbar__items">SIGN IN</div>
-                    </>
+                    </Link>
+                    {loggedIn ? <Logout/> : null}
                 </div>
                 <div className="navbar__right">
                     <Link to="/checkout">
