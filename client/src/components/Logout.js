@@ -11,7 +11,7 @@ function Logout() {
   };
 
   return (
-    <button onClick={handleLogout}>Log Out</button>
+    <div onClick={handleLogout} className="navbar__items">LOG OUT</div>
   );
 };
 
