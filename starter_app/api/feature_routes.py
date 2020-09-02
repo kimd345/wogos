@@ -19,4 +19,4 @@ def feature(id):
 @feature_routes.route('/<id>/games')
 def games(id):
     res = Feature.query.get(id)
-    return {'games': [game.to_dict() for game in res.games]}
+    return {'games': [game.to_dict() for game in features]}

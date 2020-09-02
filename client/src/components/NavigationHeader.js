@@ -24,10 +24,11 @@ function NavigationHeader (props) {
                     <Link to="/about">
                         <div className="navbar__items">ABOUT</div>
                     </Link>
-                    <Link to="/login">
-                        <div className="navbar__items">SIGN IN</div>
-                    </Link>
-                    {loggedIn ? <Logout/> : null}
+                    {loggedIn ? 
+                        <Logout /> : 
+                        <Link to="/login">
+                            <div className="navbar__items">SIGN IN</div>
+                        </Link>}
                 </div>
                 <div className="navbar__right">
                     <Link to="/checkout">
