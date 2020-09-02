@@ -25,24 +25,27 @@ function GameCard ({ game }) {
 
     return (
         <>
-        <Link to={"/game/" + id}>
         <div className="game-card"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
-                <div className="game-card__pic" style={{ backgroundImage: `url(${image_url})` }}>
+            <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
+                <button onClick={handleButtonClick}>+</button>
             </div>
+            <Link to={"/game/" + id}>
+            <div className="game-card__pic" style={{ backgroundImage: `url(${image_url})` }}/>
             <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
                 <div className={hovered ? "game-card__os hidden" : "game-card__os"}>windows icon</div>
                 <div className="game-card__buyblock">
-                    <div className="game-card__buyblock-price">
+                    <div className="game-card__buyblock-price"
+                        style={hovered ? { marginRight: "30px" } : {}}>
                         {sale
                             ?
                             <div className="game-card__pricetag--sale">
                             <span className="game-card__saletag">-{sale}%</span>
                             <div className="game-card__pricetag">
                                 <div>
-                                    <span><strike>${price}</strike></span><br />
+                                    <span className="original-price"><strike>${price}</strike></span><br />
                                     <span>{formatter.format(price - price * (sale / 100))}</span>
                                 </div>
                             </div>
@@ -52,13 +55,11 @@ function GameCard ({ game }) {
                                 <span>${price}</span>
                             </div>}
                     </div>
-                    <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
-                        <button onClick={handleButtonClick}>cart icon</button>
-                    </div>
+                    
                 </div>
             </div>
-        </div>
         </Link>
+        </div>
         </>
     )
 }

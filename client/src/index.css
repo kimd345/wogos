@@ -27,3 +27,7 @@ a, a:hover {
 .carousel-indicators {
     background-color: pink;
 }
+
+.original-price {
+    font-size: 10px;
+}

@@ -29,7 +29,7 @@ function CartItem ({ item }) {
           {sale
             ?
             <div>
-              <strike>${price}</strike><br/>
+              <span className="original-price"><strike>${price}</strike></span><br/>
               <span>{formatter.format(price - price * (sale / 100))}</span>
             </div>
             :
