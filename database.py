@@ -63,7 +63,7 @@ with app.app_context():
             'description': desc.get_text(),
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
-            'requirements':  req_soup.get_text()  # noqa
+            'requirements':  req_soup.get_text()
         }
 
     def get_features():
@@ -98,7 +98,7 @@ with app.app_context():
                     if g['genre'] == n['name']:
                         el[0].genres.append(genre)
 
-    game_tups = get_games(1)
+    game_tups = get_games(4)
     configure_genres(get_genres(), game_tups)
     configure_features(get_features(), game_tups)
     games = [game[0] for game in game_tups]

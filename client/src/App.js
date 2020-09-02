@@ -12,6 +12,8 @@ import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
 
+import { loadCart } from './actions/cart'
+
 import { loadToken, loadUser } from './actions/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -31,6 +33,7 @@ function App() {
         setLoaded(true);
         dispatch(loadToken());
         dispatch(loadUser());
+        dispatch(loadCart())
     }, [dispatch]);
 
     if (!loaded) {

@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
-import { useSelector } from 'react-redux';
+import Logout from './Logout';
 
 export function NavigationHeader (props) {
-    const cart = useSelector(state => state.cart)
+    const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
+    const loggedIn = useSelector(state => Object.keys(state.auth).length !== 0);
 
     return (
         <>
@@ -17,21 +18,22 @@ export function NavigationHeader (props) {
                     <Link to="/">
                         <div className="navbar__items">ICON</div>
                     </Link>
-                    <Link to="/games">
+                    <Link to="/games" activeClassName="selected">
                         <div className="navbar__items">STORE</div>
                     </Link>
                     <Link to="/about">
                         <div className="navbar__items">ABOUT</div>
                     </Link>
-                    <> 
+                    <Link to="/login">
                         <div className="navbar__items">SIGN IN</div>
-                    </>
+                    </Link>
+                    {loggedIn ? <Logout/> : null}
                 </div>
                 <div className="navbar__right">
                     <Link to="/checkout">
                         <div className="navbar__items">
-                            {Object.keys(cart.items).length}
-                            {/* <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div> */}
+                            cart
+                            <div className={cartAmount > 0 ? "navbar__cart green" : "navbar__cart"}> {cartAmount}</div>
                         </div>
                     </Link>
                     <div className="navbar__items search">search icon</div>

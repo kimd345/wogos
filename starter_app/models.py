@@ -57,7 +57,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "orders": [order.to_dict() for order in self.orders],
-            "reviews": [review.to_dict() for review in self.reviews],  # noqa
+            "reviews": [review.to_dict() for review in self.reviews],
             "cart_items": [game.to_dict() for game in self.cart_items]
         }
 
@@ -102,7 +102,7 @@ class Game(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "price": '{:.2f}'.format(round(self.check_sale(), 2)),
+            "price": self.check_sale(),
             "image_url": self.image_url,
             "sale": self.sale,
             "description": self.description,
@@ -115,7 +115,7 @@ class Game(db.Model):
 
     def check_sale(self):
         price = self.price if self.sale is None \
-            else self.price * (self.sale / 100)
+            else '{:.2f}'.format(round((self.price * (self.sale / 100)), 2))
         return price
 
 
@@ -166,17 +166,3 @@ class Feature(db.Model):
             "id": self.id,
             "feature": self.feature
         }
-
-
-    @property
-    def password(self):
-        return self.hashed_password
-
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
