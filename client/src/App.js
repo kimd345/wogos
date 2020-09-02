@@ -9,6 +9,7 @@ import { NavigationHeader } from './components/NavigationHeader'
 import Main from './components/Main';
 import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route path="/games">
                 <StorePage />
+            </Route>
+            <Route path="/checkout">
+                <CheckoutPage />
             </Route>
             <Route path="/login">
                 <Login />
