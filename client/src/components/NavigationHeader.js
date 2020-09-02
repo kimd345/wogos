@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
 import { useSelector } from 'react-redux';
 
+
 export function NavigationHeader (props) {
-    const cart = useSelector(state => state.cart)
+    const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
 
     return (
         <>
@@ -17,7 +18,7 @@ export function NavigationHeader (props) {
                     <Link to="/">
                         <div className="navbar__items">ICON</div>
                     </Link>
-                    <Link to="/games">
+                    <Link to="/games" activeClassName="selected">
                         <div className="navbar__items">STORE</div>
                     </Link>
                     <Link to="/about">
@@ -30,8 +31,8 @@ export function NavigationHeader (props) {
                 <div className="navbar__right">
                     <Link to="/checkout">
                         <div className="navbar__items">
-                            {Object.keys(cart.items).length}
-                            {/* <div className={cart.length > 0 ? "navbar__cart green" : "navbar__cart"}> {cart.length}</div> */}
+                            🛒
+                            <div className={cartAmount > 0 ? "navbar__cart green" : "navbar__cart"}> {cartAmount}</div>
                         </div>
                     </Link>
                     <div className="navbar__items search">search icon</div>

@@ -18,7 +18,8 @@ function StorePage (props) {
         fetchData();
     }, []);
 
-    const gameCards = games.map((game) => <GameCard key={game.id} id={game.id} title={game.title} price={game.price} />);
+    const gameCards = games.map((game) => 
+        <GameCard key={game.id} game={game} />);
 
     return (
         <>
@@ -51,10 +52,6 @@ function StorePage (props) {
                     </ul>
                 </div>
                 <div className="store-container__right">
-                    {gameCards}
-                    {gameCards}
-                    {gameCards}
-                    {gameCards}
                     {gameCards}
                 </div>
             </div>

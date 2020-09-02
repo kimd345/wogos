@@ -6,6 +6,7 @@ import './components/GameCard.css';
 import './components/StorePage.css';
 import './components/GamePage.css';
 import './components/NavigationHeader.css';
+import './components/CheckoutPage.css';
 import App from './App';
 import configureStore from './store';
 import { Provider } from 'react-redux';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import UserList from './components/UsersList';
@@ -9,8 +9,16 @@ import Main from './components/Main';
 import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
+import { useDispatch } from 'react-redux';
+
+import { loadCart } from './actions/cart'
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadCart())
+    }, [])
 
   return (
     <BrowserRouter>

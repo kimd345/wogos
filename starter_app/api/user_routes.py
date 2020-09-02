@@ -16,7 +16,7 @@ def user(id):
     return response.to_dict()
 
 
-@user_routes.route('/<id>/cart', methods=['POST', 'DELETE'])
+@user_routes.route('/<id>/cart', methods=['GET', 'POST', 'DELETE'])
 def add_to_cart(id):
     form = request.json
     user = User.query.get(id)

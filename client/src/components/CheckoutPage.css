@@ -1,0 +1,17 @@
+.checkout__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout__game-card {
+  display: flex;
+  width: 600px;
+  height: 60px;
+  background-color: whitesmoke;
+}
+
+.checkout__game-card__info {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}

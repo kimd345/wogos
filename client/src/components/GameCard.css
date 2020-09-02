@@ -12,7 +12,7 @@
 }
 
 .game-card__pic {
-    background-color: lightpink;
+    background-size: cover;
     height: 115px;
 }
 
@@ -46,4 +46,24 @@
 .game-card__buyblock {
     margin: auto 0;
     display: flex;
+}
+
+.game-card__buyblock-button {
+    margin-left: 10px;
+}
+
+.game-card__pricetag,
+.game-card__pricetag--sale {
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.game-card__saletag {
+    border-radius: 2px;
+    font-size: 16px;
+    color: white;
+    padding: 5px;
+    background-color: purple;
+    margin-right: 10px;
 }
