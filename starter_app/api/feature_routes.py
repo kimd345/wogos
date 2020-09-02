@@ -14,3 +14,9 @@ def index():
 def feature(id):
     res = Feature.query.get(id)
     return res.to_dict()
+
+
+@feature_routes.route('/<id>/games')
+def games(id):
+    res = Feature.query.get(id)
+    return {'games': [game.to_dict() for game in res.games]}
