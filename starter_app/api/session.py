@@ -36,9 +36,10 @@ session = Blueprint('session', __name__)
 #       }
 #     return jsonify({'user': user_dict, 'token': access_token}), 200
 
-@session.route('', methods=['PUT', 'POST'])
+@session.route('', methods=['PUT', 'POST', 'DELETE'])
 def auth():
-    # if request.method == 'DELETE':
+    if request.method == 'DELETE':
+        print(request)  # need to delete session token from user
 
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
@@ -68,6 +69,7 @@ def auth():
 
     access_token = create_access_token(identity=email)
     user.session_token = access_token
+
     user_dict = {
       'id': user.id,
       'username': user.username,
