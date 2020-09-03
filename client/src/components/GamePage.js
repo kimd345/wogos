@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 
 import { addToCart } from '../actions/cart';
 
-import { apiUrl } from '../config'
+import { apiUrl, formatter } from '../config'
 
 function GamePage (props) {
   const dispatch = useDispatch();
@@ -28,17 +28,15 @@ function GamePage (props) {
     fetchData();
   }, [])
 
-  useEffect(() => {
-    console.log(game)
-    console.log(game.genres)
-  }, [game])
-
   return (
     <>
       <Container>
         <div className="game-page__buy-block">
-          -{game.sale}%
-          <h2>${game.price}</h2>
+          {game.sale ? `-${game.sale}%` : null}
+          <div>
+            <span><strike>${game.price}</strike></span>
+            <h2>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
+          </div>
           {inCart
             ? <Button
               variant="success"
@@ -54,16 +52,12 @@ function GamePage (props) {
               Add to cart
           </Button>
           }
-          <Button variant="link" block>Wishlist it</Button>
         </div>
       </Container>
       <div className="game-page__banner" style={{ backgroundImage: `url(${game.image_url})` }}></div>
       <Container className="game-page__info">
         <div className="game-page__info title">
           <h1>{game.title}</h1>
-        </div>
-        <div className="game-page__info screenshots">
-          {/* TODO: screenshot carousel */}
         </div>
         <div className="game-page__info desc-details">
           <div className="game-page__info description">

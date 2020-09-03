@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from 'react-bootstrap/Button';
+
 import { addToCart } from '../actions/cart';
 
-import Button from 'react-bootstrap/Button'
-
-var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
+import { formatter } from '../config';
 
 function GameCard ({ game }) {
     const dispatch = useDispatch();
