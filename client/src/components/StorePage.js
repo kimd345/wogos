@@ -18,12 +18,14 @@ function StorePage(props) {
     const handleFeatureChange = e => {
         const checkBox = e.currentTarget
         const newFeatures = checkBox.checked ? features.concat([checkBox.value]) : features.filter(el => el !== checkBox.value)
+        setPageNum(0)
         setFeatures(newFeatures)
     }
 
     const handleGenreChange = e => {
         const checkBox = e.currentTarget
         const newGenres = checkBox.checked ? genres.concat([checkBox.value]) : genres.filter(el => el !== checkBox.value)
+        setPageNum(0)
         setGenres(newGenres)
     }
 
@@ -47,6 +49,7 @@ function StorePage(props) {
             </div>
                 <div className="store-container">
                     <div className="store-container__left">
+                        <br />
                         <span>Genre</span>
                         <ul>
                             <li><input type="checkbox" onChange={handleGenreChange} value='action'></input> Action</li>
@@ -68,15 +71,6 @@ function StorePage(props) {
                             <li><input type="checkbox" onChange={handleGenreChange} value='adventure'></input> Adventure</li>
                         </ul>
                         <br />
-                        <span>Price</span>
-                        <ul>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                        </ul>
-                        <br />
                         <span>Features</span>
                         <ul>
                             <li><input type="checkbox" onChange={handleFeatureChange} value='singleplayer'></input> Singleplayer</li>
@@ -93,8 +87,9 @@ function StorePage(props) {
                     <div className="store-container__right">
                         {gameCards}
                         <Pagination className="store__pagination">
-                            <Pagination.Item onClick={() => setPageNum(0)}>default page</Pagination.Item>
-                            <Pagination.Item onClick={() => setPageNum(1)}>page 2</Pagination.Item>
+                            <Pagination.Item onClick={() => setPageNum(0)}>First</Pagination.Item>
+                            <Pagination.Item onClick={() => setPageNum(pageNum > 0 ? pageNum - 1 : 0)}>Previous</Pagination.Item>
+                            <Pagination.Item onClick={() => setPageNum(Object.keys(games).length < 24 ? pageNum : pageNum + 1)}>Next</Pagination.Item>
                         </Pagination>
                     </div>
                 </div>
