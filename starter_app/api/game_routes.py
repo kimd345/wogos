@@ -36,3 +36,12 @@ def games_by_page(pid):
         else:
             res = Game.query.offset((int(pid) * 24)).limit(24)
     return {'games': [game.to_dict() for game in res]}
+
+
+@game_routes.route('/search/<query>')
+def search_results():
+    print('HITTING THIS ROUTE')
+    res = Game.query.filter(Game.title.any(
+        
+    ))
+    return jsonify({"msg": "HITTING THIS ROUTE 2"}), 200
