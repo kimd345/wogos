@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Search.css';
 import loader from '../loader.gif'
 import { apiUrl } from '../config'
@@ -50,17 +50,21 @@ class Search extends React.Component {
         <div className='results-container'>
           {results.map(result => {
             return (
-              <NavLink key={result.id} to={`/game/${result.id}`} className='result-item'>
-                {/* <div className='image-wrapper'>
+              <Link key={result.id} onClick={this.deleteSearch} to={`/game/${result.id}`} className='result-item'>
+                <div className='image-wrapper'>
                   <img className='result-image' src={result.image_url} alt='' />
-                </div> */}
+                </div>
                 <h6 className='result-title'>{result.title}</h6>
-              </NavLink>
+              </Link>
             )
           })}
         </div>
       )
     }
+  };
+
+  deleteSearch = () => {
+    this.setState({ query: '', results: {}, message: '' });
   };
 
   render() {

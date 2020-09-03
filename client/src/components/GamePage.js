@@ -26,7 +26,7 @@ function GamePage (props) {
       }
     }
     fetchData();
-  }, [])
+  })
 
   return (
     <>
