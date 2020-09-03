@@ -1,0 +1,50 @@
+/* Results */
+.results-container {
+  display: flex;
+  flex-flow: column;
+  width: 800px;
+}
+.result-item {
+	position: relative;
+	padding: 5px;
+	border-top: 0.05px solid rgb(220,220,220);
+	text-align: center;
+	min-width: 200px;
+  text-decoration: none;
+  background: white;
+}
+.result-title {
+	color: rgb(72,72,72);
+	font-size: 14px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	padding: 5px 10px;
+}
+.result-image {
+	width: 100px;
+	height: 60px;
+}
+.image-wrapper {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	height: 100%;
+	justify-content: left;
+}
+/*Loader*/
+.search-loading {
+  position: absolute;
+  top: 200px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+/*Show and hide*/
+.show {
+	display: inline-block;
+}
+.hide {
+	display: none;
+}
