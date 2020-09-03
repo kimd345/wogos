@@ -9,24 +9,23 @@ import { addToCart } from '../actions/cart';
 
 import { apiUrl, formatter } from '../config'
 
-function GamePage (props) {
+function GamePage () {
   const dispatch = useDispatch();
   const gameId = useParams().id;
   const [game, setGame] = useState({});
 
-  const inCart = useSelector(state => state.cart.items[gameId] != undefined);
+  const inCart = useSelector(state => state.cart.items[gameId] !== undefined);
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`${apiUrl}/games/${gameId}`);
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData)
         setGame(responseData);
       }
     }
     fetchData();
-  }, [])
+  }, [gameId])
 
   return (
     <>

@@ -18,7 +18,7 @@ function NavigationHeader (props) {
                     <Link to="/">
                         <div className="navbar__items">ICON</div>
                     </Link>
-                    <Link to="/games" activeClassName="selected">
+                    <Link to="/games">
                         <div className="navbar__items">STORE</div>
                     </Link>
                     <Link to="/about">

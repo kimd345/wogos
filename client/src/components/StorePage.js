@@ -6,7 +6,7 @@ import Pagination from 'react-bootstrap/Pagination'
 
 import GameCard from './GameCard'
 
-import { loadDefaultGames, loadGamesPage } from '../actions/games'
+import { loadGamesPage } from '../actions/games'
 
 function StorePage (props) {
     const [pageNum, setPageNum] = useState(0);
@@ -16,7 +16,7 @@ function StorePage (props) {
     useEffect(() => {
         window.scroll({top: 0, left: 0, behavior: "smooth"});
         dispatch(loadGamesPage(pageNum))
-    }, [pageNum])
+    }, [dispatch, pageNum])
 
     const gameCards = Object.values(games).map((game) => 
         <GameCard key={game.id} game={game} />);

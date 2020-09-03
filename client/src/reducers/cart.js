@@ -2,6 +2,7 @@ import {
   LOAD_CART,
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  CLEAR_CART
 } from '../actions/cart'
 
 const cartReducer = (state = { items: {} }, action) => {
@@ -14,12 +15,9 @@ const cartReducer = (state = { items: {} }, action) => {
     }
 
     case REMOVE_FROM_CART: {
-      // console.log(state.items[action.id])
-      delete state.items[action.id]
-      // console.log(state.items[action.id])
-      return {
-        ...state,
-      }
+      const nextState = { ...state }
+      delete nextState.items[action.id]
+      return nextState;
     }
 
     case LOAD_CART: {
@@ -27,6 +25,11 @@ const cartReducer = (state = { items: {} }, action) => {
         ...state,
         items: action.cart
       }
+    }
+
+    case LOAD_CART: {
+      const nextState = {};
+      return nextState;
     }
 
     default: return state;

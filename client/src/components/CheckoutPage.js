@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from '../actions/cart';
 
@@ -8,14 +8,11 @@ import Button from 'react-bootstrap/Button'
 import { formatter } from '../config';
 
 function CartItem ({ item }) {
-  const [ hovered, setHovered ] = useState(false);
   const { id, image_url, title, price, sale } = item;
 
   const dispatch = useDispatch();
   return (
-    <div className="checkout__game-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+    <div className="checkout__game-card">
       <img src={image_url} width="100" height="60" alt="game" />
       <div className="checkout__game-card__info">
         <div>
@@ -70,7 +67,7 @@ function CheckoutPage () {
     <Container className="checkout__container">
       <div className="checkout__games">
         <span>YOUR ORDER</span>
-        {cart.map(item => <CartItem item={item}/>)}
+        {cart.map(item => <CartItem key={item.id} item={item}/>)}
         <div className="checkout__game-card">
           <div className="checkout__order-total">
             <div className="checkout total">

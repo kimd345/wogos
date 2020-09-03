@@ -14,8 +14,7 @@ function GameCard ({ game }) {
     const [hovered, setHovered] = useState(false);
 
     const { id, title, price, sale, image_url } = game;
-
-    const inCart = useSelector(state => state.cart.items[id] != undefined);
+    const inCart = useSelector(state => state.cart.items[id] !== undefined);
 
     const handleButtonClick = e => {
         dispatch(addToCart(id))

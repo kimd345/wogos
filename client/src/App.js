@@ -42,8 +42,11 @@ function App() {
         setLoaded(true);
         dispatch(loadToken());
         dispatch(loadUser());
-        dispatch(loadCart())
     }, [dispatch]);
+    
+    useEffect(() => {
+        dispatch(loadCart())
+    }, [dispatch])
 
     if (!loaded) {
         return null;
