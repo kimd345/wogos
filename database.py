@@ -69,12 +69,12 @@ with app.app_context():
     def get_features():
         res = requests.get('https://api.rawg.io/api/tags')
         features = res.json()
-        return [Feature(feature=result['name']) for result in features['results']]  # noqa
+        return [Feature(feature=result['name'].lower()) for result in features['results']]  # noqa
 
     def get_genres():
         response = requests.get('https://api.rawg.io/api/genres')
         genres = response.json()
-        return [Genre(genre=result['name']) for result in genres['results']]
+        return [Genre(genre=result['name'].lower()) for result in genres['results']]  # noqa
 
     def get_game_details(id):
         url = 'https://api.rawg.io/api/games/'
@@ -87,7 +87,7 @@ with app.app_context():
             feat = feature.to_dict()
             for el in els:
                 for n in el[1]:
-                    if feat['feature'] == n['name']:
+                    if feat['feature'] == n['name'].lower():
                         el[0].features.append(feature)
 
     def configure_genres(genres, els):
@@ -95,10 +95,10 @@ with app.app_context():
             g = genre.to_dict()
             for el in els:
                 for n in el[-1]:
-                    if g['genre'] == n['name']:
+                    if g['genre'] == n['name'].lower():
                         el[0].genres.append(genre)
 
-    game_tups = get_games(4)
+    game_tups = get_games(1)
     configure_genres(get_genres(), game_tups)
     configure_features(get_features(), game_tups)
     games = [game[0] for game in game_tups]

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from starter_app.models import Game
+from starter_app.models import Game, Genre, Feature
 
 game_routes = Blueprint('games', __name__)
 
@@ -17,18 +17,22 @@ def game(id):
 
 
 @game_routes.route('/page/<pid>')
-def games(pid):
-    res = Game.query.offset((int(pid) * 24)).limit(24)
-    if request.args.get('genre'):
-        genre = request.args.get('genre')
-        if request.args.get('feature'):
-            feature = request.args.get('feature')
-            return {'games': [game.to_dict() for game in res if (feature in [f.feature.lower() for f in game.features] and genre in [g.genre.lower() for g in game.genres])]}  # noqa
-        return {'games': [game.to_dict() for game in res if genre in [g.genre.lower() for g in game.genres]]}  # noqa
-    if request.args.get('feature'):
-        feature = request.args.get('feature')
-        if request.args.get('genre'):
-            genre = request.args.get('genre')
-            return {'games': [game.to_dict() for game in res if (genre in [g.feature.lower() for g in game.genres] and feature in [f.feature.lower() for f in game.features])]}  # noqa
-        return {'games': [game.to_dict() for game in res if feature in [f.feature.lower() for f in game.features]]}  # noqa
-    return {'games': [game.to_dict() for game in res]}  # noqa
+def games_by_page(pid):
+    if request.args.get('genres') and request.args.get('features'):
+        genres = request.args.get('genres').split(',')
+        features = request.args.get('features').split(',')
+        res = Game.query.filter(Game.genres.any(
+            Genre.genre.in_(genres)) & Game.features.any(
+            Feature.feature.in_(features))).offset((int(pid) * 24)).limit(24)  # noqa
+    else:
+        if request.args.get('genres'):
+            genres = request.args.get('genres').split(',')
+            res = Game.query.filter(Game.genres.any(
+                Genre.genre.in_(genres))).offset((int(pid) * 24)).limit(24)  # noqa
+        if request.args.get('features'):
+            features = request.args.get('features').split(',')
+            res = Game.query.filter(Game.features.any(
+                Feature.feature.in_(features))).offset((int(pid) * 24)).limit(24)  # noqa
+        else:
+            res = Game.query.offset((int(pid) * 24)).limit(24)
+    return {'games': [game.to_dict() for game in res]}
