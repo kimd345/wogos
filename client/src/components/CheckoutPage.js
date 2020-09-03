@@ -46,9 +46,11 @@ function CartItem ({ item }) {
 function CheckoutPage () {
   const cart = useSelector(state => Object.values(state.cart.items));
   const user = useSelector(state => state.auth.user);
+  const loggedIn = useSelector(state => state.auth.token !== undefined);
 
-  const [completed, setCompleted] = useState(false)
-  const [completedOrder, setCompletedOrder] = useState([])
+  const [redirect, setRedirect] = useState(false);
+  const [completeOrder, setCompleteOrder] = useState([]);
+  const [completeOrderId, setCompleteOrderId] = useState();
 
   const cartTotal = cart.reduce((total, ele) => {
     let price = parseFloat(ele.price);
@@ -67,6 +69,11 @@ function CheckoutPage () {
   }, 0);
 
   const checkout = async () => {
+    if (!loggedIn) {
+      setRedirect(true);
+      return;
+    }
+
     const gameIds = cart.map(item => item.id)
     const response = await fetch(`${apiUrl}/orders`, {
       method: 'post',
@@ -78,16 +85,24 @@ function CheckoutPage () {
     
     if (response.ok) {
       const res = await response.json();
-      setCompletedOrder([...res.order]);
-      setCompleted(true);
-    } else {
-      console.log("problem")
+      setCompleteOrder([...res.order_items]);
+      setCompleteOrderId(res.order_id);
+      setRedirect(true);
     }
   }
 
-  if (completed) {
-    console.log(completedOrder)
-    return <Redirect to={{ pathname: "/order-complete", state: { order: completedOrder } }} />
+  // if (redirect && !loggedIn) {
+  //   return <Redirect to={{pathname: "/login"}}/>
+  // }
+
+  if (redirect && completeOrder) {
+    return <Redirect to={{
+      pathname: "/order-complete",
+      state: {
+        order_id: completeOrderId,
+        order_items: completeOrder
+      }
+    }}/>
   }
 
   return (
@@ -117,7 +132,7 @@ function CheckoutPage () {
       <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
         <div>
-          <Button onClick={checkout}>checkout</Button>
+            <Button onClick={checkout}>checkout</Button>
         </div>
       </div>
     </Container>
