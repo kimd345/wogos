@@ -24,17 +24,14 @@ def games_by_page(pid):
         res = Game.query.filter(Game.genres.any(
             Genre.genre.in_(genres)) & Game.features.any(
             Feature.feature.in_(features))).offset((int(pid) * 24)).limit(24)  # noqa
+    elif request.args.get('genres'):
+        genres = request.args.get('genres').split(',')
+        res = Game.query.filter(Game.genres.any(Genre.genre.in_(genres))).offset((int(pid) * 24)).limit(24)  # noqa
+    elif request.args.get('features'):
+        features = request.args.get('features').split(',')
+        res = Game.query.filter(Game.features.any(Feature.feature.in_(features))).offset((int(pid) * 24)).limit(24)  # noqa
     else:
-        if request.args.get('genres'):
-            genres = request.args.get('genres').split(',')
-            res = Game.query.filter(Game.genres.any(
-                Genre.genre.in_(genres))).offset((int(pid) * 24)).limit(24)  # noqa
-        if request.args.get('features'):
-            features = request.args.get('features').split(',')
-            res = Game.query.filter(Game.features.any(
-                Feature.feature.in_(features))).offset((int(pid) * 24)).limit(24)  # noqa
-        else:
-            res = Game.query.offset((int(pid) * 24)).limit(24)
+        res = Game.query.offset((int(pid) * 24)).limit(24)
     return {'games': [game.to_dict() for game in res]}
 
 
