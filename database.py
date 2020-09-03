@@ -35,7 +35,7 @@ with app.app_context():
         games = get_game_ids(pages)
         data = [(get_game_details(game['id']), game['tags'], game['genres'])
                 for game in games]
-        return [(Game(title=game[0]['title'], image_url=game[0]['image_url'], price=game[0]['price'], sale=game[0]['sale'], description=game[0]['description'], requirements=game[0]['requirements']), game[1], game[-1]) for game in data]  # noqa
+        return [(Game(title=game[0]['title'], image_url=game[0]['image_url'], video_url=game[0]['video_url'], price=game[0]['price'], sale=game[0]['sale'], description=game[0]['description'], requirements=game[0]['requirements']), game[1], game[-1]) for game in data]  # noqa
 
     def get_game_ids(pages):
         url = 'https://api.rawg.io/api/games?dates=2015-10-10,2020-10-10&platforms=4&page_size=40&page='  # noqa
@@ -60,6 +60,7 @@ with app.app_context():
         return {
             'title': item['name'],
             'image_url': item['background_image'],
+            'video_url': item['video_url'],
             'description': desc.get_text(),
             'price': 59.99,
             'sale': random.choice([None, 10, 20, 30, 50, 80]),
@@ -76,10 +77,18 @@ with app.app_context():
         genres = response.json()
         return [Genre(genre=result['name'].lower()) for result in genres['results']]  # noqa
 
+    def get_video(id):
+        res = requests.get(f'https://api.rawg.io/api/games/{id}/movies')
+        data = res.json()
+        return data
+
     def get_game_details(id):
         url = 'https://api.rawg.io/api/games/'
+        vid_load = get_video(id)
+        vid = vid_load['results'][0]['data'] if vid_load['results'] else None
         res = requests.get(url + str(id))
         data = res.json()
+        data['video_url'] = vid['max'] if vid else None
         return build_dict(data)
 
     def configure_features(features, els):
@@ -98,7 +107,7 @@ with app.app_context():
                     if g['genre'] == n['name'].lower():
                         el[0].genres.append(genre)
 
-    game_tups = get_games(1)
+    game_tups = get_games(4)
     configure_genres(get_genres(), game_tups)
     configure_features(get_features(), game_tups)
     games = [game[0] for game in game_tups]
