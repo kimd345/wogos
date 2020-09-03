@@ -107,7 +107,7 @@ with app.app_context():
                     if g['genre'] == n['name'].lower():
                         el[0].genres.append(genre)
 
-    game_tups = get_games(1)
+    game_tups = get_games(4)
     configure_genres(get_genres(), game_tups)
     configure_features(get_features(), game_tups)
     games = [game[0] for game in game_tups]
