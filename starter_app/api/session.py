@@ -13,8 +13,7 @@ def auth():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
-    if request.method == 'DELETE':
-        print('@@@@@@@@@@@@@@@@', request.data)  # need to delete session token from user
+    if request.method == 'DELETE':  # logout
         id = request.json.get('userId', None)
         user = User.query.filter(User.id == id).first()
         user.session_token = None
@@ -30,16 +29,14 @@ def auth():
     if not password:
         return jsonify({"msg": "Missing password"}), 400
 
-    if request.method == 'POST':
-        username = request.json.get('username', None)
-        if not username:
-            return jsonify({"msg": "Missing username"}), 400
-
-    if request.method == 'PUT':
+    if request.method == 'PUT':   # login
         user = User.query.filter(User.email == email).first()
         if not user or not user.check_password(password):
             return jsonify({"msg": "Missing password"}), 401
-    elif request.method == 'POST':
+    elif request.method == 'POST':  # signup
+        username = request.json.get('username', None)
+        if not username:
+            return jsonify({"msg": "Missing username"}), 400
         user = User(username=username, email=email)
         user.password = password
 
