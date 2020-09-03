@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { removeFromCart } from '../actions/cart';
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
-import { formatter } from '../config';
+import { formatter, apiUrl } from '../config';
 
 function CartItem ({ item }) {
   const { id, image_url, title, price, sale } = item;
@@ -44,6 +45,10 @@ function CartItem ({ item }) {
 
 function CheckoutPage () {
   const cart = useSelector(state => Object.values(state.cart.items));
+  const user = useSelector(state => state.auth.user);
+
+  const [completed, setCompleted] = useState(false)
+  const [completedOrder, setCompletedOrder] = useState([])
 
   const cartTotal = cart.reduce((total, ele) => {
     let price = parseFloat(ele.price);
@@ -60,6 +65,30 @@ function CheckoutPage () {
     }
     return total;
   }, 0);
+
+  const checkout = async () => {
+    const gameIds = cart.map(item => item.id)
+    const response = await fetch(`${apiUrl}/orders`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "user_id": user.id,
+        "game_ids": [...gameIds]})
+    });
+    
+    if (response.ok) {
+      const res = await response.json();
+      setCompletedOrder([...res.order]);
+      setCompleted(true);
+    } else {
+      console.log("problem")
+    }
+  }
+
+  if (completed) {
+    console.log(completedOrder)
+    return <Redirect to={{ pathname: "/order-complete", state: { order: completedOrder } }} />
+  }
 
   return (
     <>
@@ -87,6 +116,9 @@ function CheckoutPage () {
       </div>
       <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
+        <div>
+          <Button onClick={checkout}>checkout</Button>
+        </div>
       </div>
     </Container>
     </>

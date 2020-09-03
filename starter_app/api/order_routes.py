@@ -1,18 +1,31 @@
 from flask import Blueprint, jsonify, request
-from starter_app.models import db, Order
+from starter_app.models import db, Order, Game
+
+import datetime
 
 order_routes = Blueprint('orders', __name__)
 
 
-@order_routes.route('/', methods=['GET', 'POST'])
+@order_routes.route('', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        form = request.json
-        order = Order(
-            user_id=form['user_id'], game_id=form['game_id'], price_paid=form['price_paid'])  # noqa
-        db.session.add(order)
+        data = request.json
+        user_id = data["user_id"]
+        game_ids = data["game_ids"]
+        datetime_obj = datetime.datetime.now()
+        for game_id in game_ids:
+            game = Game.query.get(game_id)
+            price = float(game.to_dict()["price"])
+            sale = game.to_dict()["sale"] if game.to_dict()["sale"] else 0
+            discount = price * (sale / 100)
+            db.session.add(Order(
+                user_id=user_id,
+                game_id=game_id,
+                price_paid=(price - discount),
+                paid_date=datetime_obj))
         db.session.commit()
-        return {'order': order.to_dict()}
+        res = Order.query.filter_by(paid_date=datetime_obj).all()
+        return {'order': [order.to_dict() for order in res]}
     else:
         res = Order.query.all()
         return {'orders': [order.to_dict() for order in res]}

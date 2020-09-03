@@ -27,7 +27,7 @@ const cartReducer = (state = { items: {} }, action) => {
       }
     }
 
-    case LOAD_CART: {
+    case CLEAR_CART: {
       const nextState = {};
       return nextState;
     }
