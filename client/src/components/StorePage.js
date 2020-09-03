@@ -47,6 +47,7 @@ function StorePage(props) {
             </div>
                 <div className="store-container">
                     <div className="store-container__left">
+                        <br />
                         <span>Genre</span>
                         <ul>
                             <li><input type="checkbox" onChange={handleGenreChange} value='action'></input> Action</li>
@@ -66,15 +67,6 @@ function StorePage(props) {
                             <li><input type="checkbox" onChange={handleGenreChange} value='family'></input> Family</li>
                             <li><input type="checkbox" onChange={handleGenreChange} value='fighting'></input> Fighting</li>
                             <li><input type="checkbox" onChange={handleGenreChange} value='adventure'></input> Adventure</li>
-                        </ul>
-                        <br />
-                        <span>Price</span>
-                        <ul>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
-                            <li><input type="checkbox"></input>over $1</li>
                         </ul>
                         <br />
                         <span>Features</span>
