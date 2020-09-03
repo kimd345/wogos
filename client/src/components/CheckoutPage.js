@@ -5,11 +5,7 @@ import { removeFromCart } from '../actions/cart';
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-// formatter.format(2500); /* $2,500.00 */
+import { formatter } from '../config';
 
 function CartItem ({ item }) {
   const [ hovered, setHovered ] = useState(false);
@@ -36,10 +32,10 @@ function CartItem ({ item }) {
         <div className="checkout__game-card__price">
           {sale
             ?
-            <div>
-              <span className="original-price"><strike>${price}</strike></span><br/>
-              <span>{formatter.format(price - price * (sale / 100))}</span>
-            </div>
+              <>
+              <div style={{ color: "gray" }}><strike>${price}</strike></div>
+              <div>{formatter.format(price - price * (sale / 100))}</div>
+              </>
             :
               <span>${price}</span>
           }
@@ -57,13 +53,15 @@ function CheckoutPage () {
     if (ele.sale) {
       return total + price - price * (ele.sale / 100)
     }
-    return total + parseFloat(price)}, 0);
+    return total + parseFloat(price)
+  }, 0);
 
   const savingsTotal = cart.reduce((total, ele) => {
     let price = parseFloat(ele.price);
     if (ele.sale) {
-      return total + price * (ele.sale / 100)
+      return total + (price * (ele.sale / 100))
     }
+    return total;
   }, 0);
 
   return (

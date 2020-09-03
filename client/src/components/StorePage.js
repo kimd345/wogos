@@ -14,8 +14,8 @@ function StorePage (props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (pageNum === 0) dispatch(loadDefaultGames())
-        else dispatch(loadGamesPage(pageNum))
+        window.scroll({top: 0, left: 0, behavior: "smooth"});
+        dispatch(loadGamesPage(pageNum))
     }, [pageNum])
 
     const gameCards = Object.values(games).map((game) => 
