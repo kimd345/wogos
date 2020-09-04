@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
 import Review from './Review'
+import ReviewForm from './ReviewForm'
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
@@ -17,6 +18,7 @@ function GamePage() {
   const [game, setGame] = useState({});
 
   const inCart = useSelector(state => state.cart.items[gameId] !== undefined);
+  const inCollection = true
 
   useEffect(() => {
     async function fetchData() {
@@ -88,6 +90,9 @@ function GamePage() {
         <div className="game-page__info reviews">
           <h6>Reviews</h6>
           {game.reviews ? game.reviews.map(review => <Review key={review.id} props={review} />) : null}
+        </div>
+        <div className="game-page__info reviews-form">
+          {inCollection ? <ReviewForm gameID={game.id} /> : <p>You must purchase the game in order to review it.</p>}
         </div>
       </Container>
     </>
