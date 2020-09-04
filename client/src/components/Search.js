@@ -5,8 +5,8 @@ import loader from '../loader.gif'
 import { apiUrl } from '../config'
 
 class Search extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       query: '',
       results: {},
@@ -20,7 +20,6 @@ class Search extends React.Component {
     const response = await fetch(`${apiUrl}/games/search=${query}`);
     if (response.ok) {
       const responseData = await response.json();
-      console.warn(responseData)
       const resultNotFoundMsg = ! responseData.search_results.length
                               ? 'NO RESULTS FOUND. Try adjusting your search.'
                               : '';
