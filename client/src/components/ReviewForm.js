@@ -6,6 +6,7 @@ const ReviewForm = props => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [rating, setRating] = useState(0)
+  const [redirect, setRedirect] = useState(false)
   const user = useSelector(state => state.auth.user)
   const gameID = props.gameID
 
