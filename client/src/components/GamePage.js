@@ -16,9 +16,11 @@ function GamePage() {
   const dispatch = useDispatch();
   const gameId = useParams().id;
   const [game, setGame] = useState({});
-
+  const [newReview, setNewReview] = useState(false)
+  const user = useSelector(state => state.auth.user)
   const inCart = useSelector(state => state.cart.items[gameId] !== undefined);
-  const inCollection = true
+  const inCollection = useSelector(state => state.collection[gameId] !== undefined)
+  const reviewed = game.reviews ? game.reviews.filter(el => parseInt(el.user_id, 10) === user.id).length > 0 : false
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +31,7 @@ function GamePage() {
       }
     }
     fetchData();
-  }, [gameId])
+  }, [gameId, newReview])
 
   return (
     <>
@@ -45,7 +47,7 @@ function GamePage() {
               variant="success"
               size="lg"
               block>
-              <Link to="/checkout" style={{ color: "white"}}>
+              <Link to="/checkout" style={{ color: "white" }}>
                 <i className="fa fa-shopping-cart" /> Check out now
               </Link>
             </Button>
@@ -92,7 +94,7 @@ function GamePage() {
           {game.reviews ? game.reviews.map(review => <Review key={review.id} props={review} />) : null}
         </div>
         <div className="game-page__info reviews-form">
-          {inCollection ? <ReviewForm gameID={game.id} /> : <p>You must purchase the game in order to review it.</p>}
+          {inCollection && !reviewed ? <ReviewForm setNewReview={setNewReview} gameID={game.id} /> : reviewed ? 'You have already reviewed this game!' : 'You must own this game to leave a review.'}
         </div>
       </Container>
     </>

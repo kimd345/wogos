@@ -6,14 +6,12 @@ const ReviewForm = props => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [rating, setRating] = useState(0)
-  const [redirect, setRedirect] = useState(false)
   const user = useSelector(state => state.auth.user)
   const gameID = props.gameID
 
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(user)
     postReview({
       'user_id': user.id,
       'game_id': gameID,
@@ -21,6 +19,10 @@ const ReviewForm = props => {
       'body': body,
       'star_rating': rating
     })
+    setRating(1)
+    setBody('')
+    setTitle('')
+    props.setNewReview(true)
   }
 
   return (
