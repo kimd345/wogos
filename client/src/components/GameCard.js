@@ -14,8 +14,7 @@ function GameCard ({ game }) {
     const [hovered, setHovered] = useState(false);
 
     const { id, title, price, sale, image_url } = game;
-
-    const inCart = useSelector(state => state.cart.items[id] != undefined);
+    const inCart = useSelector(state => state.cart.items[id] !== undefined);
 
     const handleButtonClick = e => {
         dispatch(addToCart(id))
@@ -44,7 +43,7 @@ function GameCard ({ game }) {
             <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
                 <div className={hovered ? "game-card__os hidden" : "game-card__os"}>
-                    W
+                    <i class="fab fa-windows"></i>
                 </div>
                 <div className="game-card__buyblock">
                     <div className="game-card__buyblock-price"

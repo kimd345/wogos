@@ -11,6 +11,7 @@ import Main from './components/Main';
 import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
+import OrderCompletePage from './components/OrderCompletePage';
 
 import { loadCart } from './actions/cart'
 import { loadToken, loadUser } from './actions/auth';
@@ -42,8 +43,11 @@ function App() {
         setLoaded(true);
         dispatch(loadToken());
         dispatch(loadUser());
-        dispatch(loadCart())
     }, [dispatch]);
+    
+    useEffect(() => {
+        dispatch(loadCart())
+    }, [dispatch])
 
     if (!loaded) {
         return null;
@@ -57,6 +61,7 @@ function App() {
             <Route path="/game/:id">
                 <GamePage />
             </Route>
+            <Route path="/order-complete" render={(props) => <OrderCompletePage {...props} />}/>
             <Route path="/games">
                 <StorePage />
             </Route>

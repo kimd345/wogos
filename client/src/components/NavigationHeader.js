@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/esm/Container';
 import Logout from './Logout';
+import Search from './Search';
 
 function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
@@ -18,7 +19,7 @@ function NavigationHeader (props) {
                     <Link to="/">
                         <div className="navbar__items">ICON</div>
                     </Link>
-                    <Link to="/games" activeClassName="selected">
+                    <Link to="/games">
                         <div className="navbar__items">STORE</div>
                     </Link>
                     <Link to="/about">
@@ -29,6 +30,7 @@ function NavigationHeader (props) {
                         <Link to="/login">
                             <div className="navbar__items">SIGN IN</div>
                         </Link>}
+                    <Search />
                 </div>
                 <div className="navbar__right">
                     <Link to="/checkout">

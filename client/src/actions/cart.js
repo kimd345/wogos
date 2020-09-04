@@ -5,6 +5,7 @@ const CART_KEY = 'gog/cart'
 export const LOAD_CART = 'LOAD_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const CLEAR_CART = 'CLEAR_CART';
 
 const addToCartAction = item => ({
   type: ADD_TO_CART,
@@ -21,7 +22,11 @@ const loadCartAction = cart => ({
   cart
 })
 
-export const addToCart = (game_id, user_id) => async dispatch => {
+const clearCartAction = () => ({
+  type: CLEAR_CART,
+})
+
+export const addToCart = (game_id) => async dispatch => {
   const response = await fetch(`${apiUrl}/games/${game_id}`);
   if (response.ok) {
     const item = await response.json();
@@ -33,35 +38,28 @@ export const addToCart = (game_id, user_id) => async dispatch => {
     dispatch(addToCartAction(item))
   }
   dispatch(loadCart())
-  
-  // TODO: if user signed in then post change to db
-  // const response = await fetch(`${apiUrl}/users/${user_id}/cart`, {
-  //   method: 'post',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ game_id })
-  // });
-
-  // if (response.ok) {
-  //   const item = await response.json();
-  //   dispatch(addToCartAction(item))
-  // }
 }
 
-export const removeFromCart = (game_id) => async (dispatch, getState) => {
+export const removeFromCart = (game_id) => async (dispatch) => {
   let currentCart = JSON.parse(window.localStorage.getItem(CART_KEY));
   delete currentCart[game_id];
   window.localStorage.setItem(CART_KEY, JSON.stringify(currentCart))
 
   dispatch(removeFromCartAction(game_id))
-  dispatch(loadCart());
+  dispatch(loadCart())
+}
+  
+  export const loadCart = () => async (dispatch) => {
+    let currentCart = window.localStorage.getItem(CART_KEY);
+    currentCart
+  ? currentCart = JSON.parse(currentCart)
+  : currentCart = {};
+  
+  dispatch(loadCartAction(currentCart))
 }
 
-export const loadCart = (user_id) => async (dispatch, getState) => {
-  let currentCart = window.localStorage.getItem(CART_KEY);
-  currentCart
-    ? currentCart = JSON.parse(currentCart)
-    : currentCart = {};
-  dispatch(loadCartAction(currentCart))
-
-  // TODO: if user signed in then set current cart to values in db
+export const clearCart = () => dispatch => {
+  window.localStorage.removeItem(CART_KEY);
+  dispatch(clearCartAction());
+  dispatch(loadCart());
 }

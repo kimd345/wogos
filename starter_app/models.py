@@ -64,11 +64,13 @@ class User(db.Model, UserMixin):
 
 class Order(db.Model):
     __tablename__ = 'orders'
+    __tableargs__ = (db.UniqueConstraint('user_id', 'game_id', name="uix_1"))
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
     price_paid = db.Column(db.Float, nullable=False)
+    paid_date = db.Column(db.DateTime, nullable=False)
 
     def to_dict(self):
         return {

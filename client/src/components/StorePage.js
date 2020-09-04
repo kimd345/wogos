@@ -6,7 +6,7 @@ import Pagination from 'react-bootstrap/Pagination'
 
 import GameCard from './GameCard'
 
-import { loadDefaultGames, loadGamesPage } from '../actions/games'
+import { loadGamesPage } from '../actions/games'
 
 function StorePage(props) {
     const [pageNum, setPageNum] = useState(0);
