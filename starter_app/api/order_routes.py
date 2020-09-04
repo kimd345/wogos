@@ -10,7 +10,7 @@ order_routes = Blueprint('orders', __name__)
 @order_routes.route('', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        order_id = uuid.uuid4();
+        order_id = uuid.uuid4()
         order_list = []
         data = request.json
         user_id = data["user_id"]

@@ -9,20 +9,28 @@ import Button from 'react-bootstrap/Button'
 import { formatter, apiUrl } from '../config';
 
 function CartItem ({ item }) {
+  const [hovered, setHovered] = useState(false);
   const { id, image_url, title, price, sale } = item;
 
   const dispatch = useDispatch();
   return (
-    <div className="checkout__game-card">
+    <div className="checkout__game-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
       <img src={image_url} width="100" height="60" alt="game" />
       <div className="checkout__game-card__info">
-        <div>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column"}}>
           <strong>{title}</strong>
           <div className="checkout__game-card__buttons">
             <Button
               onClick={() => dispatch(removeFromCart(id))}
               size="sm"
-              variant="link">
+              variant="link"
+              className={hovered ? "" : "hidden"}
+              style={{ padding: "0", color: "gray" }}>
               remove
             </Button>
           </div>
@@ -91,9 +99,14 @@ function CheckoutPage () {
     }
   }
 
-  // if (redirect && !loggedIn) {
-  //   return <Redirect to={{pathname: "/login"}}/>
-  // }
+  if (redirect && !loggedIn) {
+    return <Redirect to={{
+      pathname: "/login",
+      state: {
+        message: "You need an account to checkout. Please sign in or sign up to proceed."
+      }
+    }}/>
+  }
 
   if (redirect && completeOrder) {
     return <Redirect to={{
@@ -110,7 +123,7 @@ function CheckoutPage () {
     <div className="divider"/>
     <Container className="checkout__container">
       <div className="checkout__games">
-        <span>YOUR ORDER</span>
+        <span>YOUR ORDER (TODO: different interface when no items in cart and direct users to store page!)</span>
         {cart.map(item => <CartItem key={item.id} item={item}/>)}
         <div className="checkout__game-card">
           <div className="checkout__order-total">
@@ -120,8 +133,8 @@ function CheckoutPage () {
                 {formatter.format(cartTotal)}
               </span>
             </div>
-            <div className="checkout savings">
-              <strong>YOU SAVE: </strong>
+              <div style={{ color: "#80AC02", fontSize: "12px" }}>
+                <strong>YOU SAVE: </strong>
               <span>
                 {formatter.format(savingsTotal)}
               </span>
@@ -132,7 +145,20 @@ function CheckoutPage () {
       <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
         <div>
-            <Button onClick={checkout}>checkout</Button>
+            <p>:-)</p>
+            <div style={{ display: "flex"}}>
+              <div style={{ fontSize: "25px", padding: "10px", fontWeight: "600"}}>
+                {formatter.format(cartTotal)}
+              </div>
+              <Button
+                block
+                variant="success"
+                onClick={checkout}
+                style={{ margin: "10px"}}>
+                PAY FOR YOUR ORDER NOW
+              </Button>
+            </div>
+            
         </div>
       </div>
     </Container>

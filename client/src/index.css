@@ -31,3 +31,12 @@ a, a:hover {
 .original-price {
     font-size: 10px;
 }
+
+.btn-success,
+.btn-success:disabled {
+    background-color: #80AC02;
+}
+
+.btn-success:hover {
+    background-color: #8ab80b;
+}
