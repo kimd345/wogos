@@ -18,7 +18,7 @@ def index():
         datetime_obj = datetime.datetime.now()
         for game_id in game_ids:
             game = Game.query.get(game_id)
-            price = game.check_sale();
+            price = game.check_sale()
             order_list.append({
                 "id": game.id,
                 "title": game.title,
@@ -30,7 +30,7 @@ def index():
                 price_paid=price,
                 paid_date=datetime_obj))
         db.session.commit()
-        return {'order_id': order_id,'order_items': [item for item in order_list]}
+        return {'order_id': order_id, 'order_items': [item for item in order_list]}  # noqa
     else:
         res = Order.query.all()
         return {'orders': [order.to_dict() for order in res]}
