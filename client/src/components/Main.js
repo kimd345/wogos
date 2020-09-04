@@ -17,7 +17,10 @@ function Main (props) {
         <>
         <div className="divider" />
         <Container>
-        <span>Highlights</span>
+            <i class="fa fa-thumb-tack"/>
+            <span style={{ marginLeft: "8px", fontWeight: "600" }}>
+                Highlights
+            </span>
             <Carousel
                 activeIndex={index}
                 onSelect={handleSelect}

@@ -25,7 +25,7 @@ function GamePage () {
       }
     }
     fetchData();
-  })
+  }, [gameId])
 
   return (
     <>
@@ -39,16 +39,17 @@ function GamePage () {
           {inCart
             ? <Button
               variant="success"
+              size="lg"
               block>
-              <Link to="/checkout">
-                Check out now
+              <Link to="/checkout" style={{ color: "white"}}>
+                <i class="fa fa-shopping-cart" /> Check out now
               </Link>
             </Button>
             : <Button
               variant="success"
               block
               onClick={() => dispatch(addToCart(gameId))}>
-              Add to cart
+              <i class="fa fa-cart-plus" /> Add to cart
           </Button>
           }
         </div>

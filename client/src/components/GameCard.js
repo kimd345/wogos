@@ -15,6 +15,8 @@ function GameCard ({ game }) {
 
     const { id, title, price, sale, image_url } = game;
     const inCart = useSelector(state => state.cart.items[id] !== undefined);
+    // TODO CHECK IF IN USER LIBRARY
+    const inLibrary = false;
 
     const handleButtonClick = e => {
         dispatch(addToCart(id))
@@ -24,26 +26,29 @@ function GameCard ({ game }) {
         <>
         <div className="game-card"
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
+            onMouseLeave={() => setHovered(false)}>
             <div className={hovered ? "game-card__buyblock-button" : "game-card__buyblock-button hidden"}>
                 <Button
                     disabled={inCart}
                     size="sm"
+                    block
                     variant="success"
                     onClick={handleButtonClick}>
-                        {inCart ? "✓" : "✚"}
+                        {inCart ? <i class="fa fa-check" /> : <i class="fa fa-cart-plus" /> }
                     </Button>
             </div>
             <div className={inCart ? "game-card__flag cart" : "game-card__flag cart hidden"}>
-                {inCart ? "IN CART" : ""}
+                {inCart ? <><i class="fa fa-shopping-cart" /><span>IN CART</span></> : ""}
+            </div>
+            <div className={inLibrary ? "game-card__flag library" : "game-card__flag library hidden"}>
+                {inLibrary ? <><i class="fa fa-book" /><span>IN LIBRARY</span></> : ""}
             </div>
             <Link to={"/game/" + id}>
             <div className="game-card__pic" style={{ backgroundImage: `url(${image_url})` }}/>
             <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
                 <div className={hovered ? "game-card__os hidden" : "game-card__os"}>
-                    <i class="fab fa-windows"></i>
+                    <i class="fa fa-windows"></i>
                 </div>
                 <div className="game-card__buyblock">
                     <div className="game-card__buyblock-price"
