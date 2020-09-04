@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
+import Review from './Review'
+
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -9,7 +11,7 @@ import { addToCart } from '../actions/cart';
 
 import { apiUrl, formatter } from '../config'
 
-function GamePage () {
+function GamePage() {
   const dispatch = useDispatch();
   const gameId = useParams().id;
   const [game, setGame] = useState({});
@@ -41,7 +43,7 @@ function GamePage () {
               variant="success"
               size="lg"
               block>
-              <Link to="/checkout" style={{ color: "white"}}>
+              <Link to="/checkout" style={{ color: "white" }}>
                 <i class="fa fa-shopping-cart" /> Check out now
               </Link>
             </Button>
@@ -74,7 +76,7 @@ function GamePage () {
                 {game.genres ? game.genres.map(ele => <li>{ele.genre}</li>) : null}
               </ul>
             </div>
-            <br/>
+            <br />
             <div className="details__features">
               <span>Game Features:</span>
               <ul>
@@ -85,6 +87,7 @@ function GamePage () {
         </div>
         <div className="game-page__info reviews">
           <h6>Reviews</h6>
+          {game.reviews ? game.reviews.map(review => <Review key={review.id} props={review} />) : null}
         </div>
       </Container>
     </>
