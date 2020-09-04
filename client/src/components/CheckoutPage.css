@@ -56,3 +56,17 @@
   background-color: whitesmoke;
   width: 400px;
 }
+
+.alert {
+  margin: 10px 0px;
+  padding: 15px;
+  font-size: .8rem;
+}
+
+.alert > ul {
+  margin: 0;
+}
+
+.alert-heading {
+  font-size: .9rem;
+}
