@@ -25,7 +25,7 @@ function GamePage () {
       }
     }
     fetchData();
-  }, [gameId])
+  })
 
   return (
     <>
