@@ -10,7 +10,7 @@ order_routes = Blueprint('orders', __name__)
 @order_routes.route('', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        order_id = uuid.uuid4();
+        order_id = uuid.uuid4()
         order_list = []
         data = request.json
         user_id = data["user_id"]
@@ -18,7 +18,7 @@ def index():
         datetime_obj = datetime.datetime.now()
         for game_id in game_ids:
             game = Game.query.get(game_id)
-            price = game.check_sale();
+            price = game.check_sale()
             order_list.append({
                 "id": game.id,
                 "title": game.title,
@@ -30,7 +30,7 @@ def index():
                 price_paid=price,
                 paid_date=datetime_obj))
         db.session.commit()
-        return {'order_id': order_id,'order_items': [item for item in order_list]}
+        return {'order_id': order_id, 'order_items': [item for item in order_list]}  # noqa
     else:
         res = Order.query.all()
         return {'orders': [order.to_dict() for order in res]}
