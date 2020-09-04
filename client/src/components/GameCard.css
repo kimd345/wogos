@@ -14,6 +14,7 @@
 
 .game-card__pic {
     background-size: cover;
+    background-position: center;
     height: 115px;
 }
 
@@ -50,6 +51,8 @@
 }
 
 .game-card__buyblock-button {
+    width: 32px;
+    height: 32px;
     position: absolute;
     top: 160px;
     right: 10px;
@@ -71,9 +74,10 @@
 
 .game-card__saletag {
     border-radius: 2px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
     color: white;
-    padding: 5px;
+    padding: 6px;
     background-color: purple;
     margin-right: 10px;
 }
@@ -87,8 +91,18 @@
     text-align: center;
 }
 
+.game-card__flag.library > span,
+.game-card__flag.cart > span {
+    margin-left: 7px;
+}
+
 .game-card__flag.cart {
     background-color: mediumturquoise;
     width: 90px;
+    border-radius: 0 3px 3px 0;
+}
+.game-card__flag.library {
+    background-color: goldenrod;
+    width: 100px;
     border-radius: 0 3px 3px 0;
 }

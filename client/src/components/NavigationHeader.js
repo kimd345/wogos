@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
@@ -9,6 +9,18 @@ import Search from './Search';
 function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
     const loggedIn = useSelector(state => Object.keys(state.auth).length !== 0);
+    const [pulse, setPulse] = useState(false);
+
+    useEffect(() => {
+        setPulse(true);
+        setTimeout(() => setPulse(false), 800);
+    }, [cartAmount])
+
+    let pulseClass =
+        pulse && cartAmount > 0
+        ? "navbar__cart green pulse"
+        : (cartAmount > 0 ? "navbar__cart green" : "navbar__cart");
+        
 
     return (
         <>
@@ -16,30 +28,32 @@ function NavigationHeader (props) {
         <div className="navbar">
             <Container className="navbar__container">
                 <div className="navbar__left">
-                    <Link to="/">
-                        <div className="navbar__items">ICON</div>
-                    </Link>
-                    <Link to="/games">
-                        <div className="navbar__items">STORE</div>
-                    </Link>
-                    <Link to="/about">
-                        <div className="navbar__items">ABOUT</div>
-                    </Link>
-                    {loggedIn ? 
-                        <Logout /> : 
-                        <Link to="/login">
-                            <div className="navbar__items">SIGN IN</div>
-                        </Link>}
+                    <div className="navbar__items">
+                        <Link to="/">ICON</Link>
+                    </div>
+                    <div className="navbar__items">
+                        <Link to="/games">STORE</Link>
+                    </div>
+                    <div className="navbar__items">
+                        <Link to="/about">ABOUT</Link>
+                    </div>
+                    <div className="navbar__items login-logout">
+                        {loggedIn
+                            ? <Logout />
+                            : <Link to="/login">SIGN IN</Link>}
+                    </div>
                     <Search />
                 </div>
                 <div className="navbar__right">
-                    <Link to="/checkout">
-                        <div className="navbar__items">
-                            cart
-                            <div className={cartAmount > 0 ? "navbar__cart green" : "navbar__cart"}> {cartAmount}</div>
-                        </div>
-                    </Link>
-                    <div className="navbar__items search">search icon</div>
+                    <div className="navbar__items">
+                        <Link to="/checkout">
+                            <i class="fa fa-shopping-cart" />
+                            <div className={pulseClass}> {cartAmount}</div>
+                        </Link>
+                    </div>
+                    <div className="navbar__items">
+                        <i className='fa fa-search search-icon' />
+                    </div>
                 </div>
             </Container>
         </div>

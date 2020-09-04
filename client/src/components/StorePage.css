@@ -17,5 +17,5 @@
 
 .store__pagination {
     grid-column: 1 / 4 ;
-    margin: auto;
+    margin: 0 auto;
 }
