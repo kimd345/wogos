@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { removeFromCart } from '../actions/cart';
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
-import { formatter } from '../config';
+import { formatter, apiUrl } from '../config';
 
 function CartItem ({ item }) {
-  const [ hovered, setHovered ] = useState(false);
   const { id, image_url, title, price, sale } = item;
 
   const dispatch = useDispatch();
   return (
-    <div className="checkout__game-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+    <div className="checkout__game-card">
       <img src={image_url} width="100" height="60" alt="game" />
       <div className="checkout__game-card__info">
         <div>
@@ -47,6 +45,12 @@ function CartItem ({ item }) {
 
 function CheckoutPage () {
   const cart = useSelector(state => Object.values(state.cart.items));
+  const user = useSelector(state => state.auth.user);
+  const loggedIn = useSelector(state => state.auth.token !== undefined);
+
+  const [redirect, setRedirect] = useState(false);
+  const [completeOrder, setCompleteOrder] = useState([]);
+  const [completeOrderId, setCompleteOrderId] = useState();
 
   const cartTotal = cart.reduce((total, ele) => {
     let price = parseFloat(ele.price);
@@ -64,13 +68,50 @@ function CheckoutPage () {
     return total;
   }, 0);
 
+  const checkout = async () => {
+    if (!loggedIn) {
+      setRedirect(true);
+      return;
+    }
+
+    const gameIds = cart.map(item => item.id)
+    const response = await fetch(`${apiUrl}/orders`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "user_id": user.id,
+        "game_ids": [...gameIds]})
+    });
+    
+    if (response.ok) {
+      const res = await response.json();
+      setCompleteOrder([...res.order_items]);
+      setCompleteOrderId(res.order_id);
+      setRedirect(true);
+    }
+  }
+
+  // if (redirect && !loggedIn) {
+  //   return <Redirect to={{pathname: "/login"}}/>
+  // }
+
+  if (redirect && completeOrder) {
+    return <Redirect to={{
+      pathname: "/order-complete",
+      state: {
+        order_id: completeOrderId,
+        order_items: completeOrder
+      }
+    }}/>
+  }
+
   return (
     <>
     <div className="divider"/>
     <Container className="checkout__container">
       <div className="checkout__games">
         <span>YOUR ORDER</span>
-        {cart.map(item => <CartItem item={item}/>)}
+        {cart.map(item => <CartItem key={item.id} item={item}/>)}
         <div className="checkout__game-card">
           <div className="checkout__order-total">
             <div className="checkout total">
@@ -90,6 +131,9 @@ function CheckoutPage () {
       </div>
       <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
+        <div>
+            <Button onClick={checkout}>checkout</Button>
+        </div>
       </div>
     </Container>
     </>
