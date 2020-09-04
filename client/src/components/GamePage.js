@@ -45,15 +45,15 @@ function GamePage() {
               variant="success"
               size="lg"
               block>
-              <Link to="/checkout" style={{ color: "white" }}>
-                <i class="fa fa-shopping-cart" /> Check out now
+              <Link to="/checkout" style={{ color: "white"}}>
+                <i className="fa fa-shopping-cart" /> Check out now
               </Link>
             </Button>
             : <Button
               variant="success"
               block
               onClick={() => dispatch(addToCart(gameId))}>
-              <i class="fa fa-cart-plus" /> Add to cart
+              <i className="fa fa-cart-plus" /> Add to cart
           </Button>
           }
         </div>

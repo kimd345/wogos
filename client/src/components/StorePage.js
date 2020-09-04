@@ -32,7 +32,7 @@ function StorePage(props) {
     useEffect(() => {
         window.scroll({ top: 0, left: 0, behavior: "smooth" });
         dispatch(loadGamesPage(pageNum, features, genres))
-    }, [pageNum, features, genres])
+    }, [pageNum, features, genres, dispatch])
 
     const gameCards = Object.values(games).map((game) =>
         <GameCard key={game.id} game={game} />);
