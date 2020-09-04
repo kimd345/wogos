@@ -14,6 +14,7 @@ import CheckoutPage from './components/CheckoutPage';
 import OrderCompletePage from './components/OrderCompletePage';
 
 import { loadCart } from './actions/cart'
+import { loadCurrentUserCollection } from './actions/collection'
 import { loadToken, loadUser } from './actions/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -38,16 +39,23 @@ function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const needLogin = useSelector(state => !state.auth.token);
+    const user = useSelector(state => state.auth.user);
 
     useEffect(() => {
-        setLoaded(true);
         dispatch(loadToken());
         dispatch(loadUser());
+        setLoaded(true);
     }, [dispatch]);
     
     useEffect(() => {
         dispatch(loadCart())
     }, [dispatch])
+
+    useEffect(() => {
+        if (user) {
+            dispatch(loadCurrentUserCollection(user.id))
+        }
+    }, [user, dispatch])
 
     if (!loaded) {
         return null;

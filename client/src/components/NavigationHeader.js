@@ -47,7 +47,7 @@ function NavigationHeader (props) {
                 <div className="navbar__right">
                     <div className="navbar__items">
                         <Link to="/checkout">
-                            <i class="fa fa-shopping-cart" />
+                            <i className="fa fa-shopping-cart" />
                             <div className={pulseClass}> {cartAmount}</div>
                         </Link>
                     </div>

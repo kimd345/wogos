@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { removeFromCart } from '../actions/cart';
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
 
 import { formatter, apiUrl } from '../config';
+
+function RemovedFromCartAlert ({ games }) {
+  const [show, setShow] = useState(true);
+
+  if (!show) return null;
+
+  return (
+    <Alert
+      dismissible
+      variant="warning"
+      onClose={() => setShow(false)}
+      style={{ width: "600px"}}>
+      <Alert.Heading>{games.length} item(s) removed from cart</Alert.Heading>
+      <p>Removed the following items from your cart because they already exist in your collection.</p>
+      <ul>
+        {games.map(game => <li>{game}</li>)}
+      </ul>
+    </Alert>
+  )
+}
 
 function CartItem ({ item }) {
   const [hovered, setHovered] = useState(false);
@@ -52,13 +73,28 @@ function CartItem ({ item }) {
 }
 
 function CheckoutPage () {
+  const dispatch = useDispatch();
   const cart = useSelector(state => Object.values(state.cart.items));
+  const cartObj = useSelector(state => state.cart.items);
+  const collectionIds = useSelector(state => Object.keys(state.collection));
   const user = useSelector(state => state.auth.user);
   const loggedIn = useSelector(state => state.auth.token !== undefined);
 
   const [redirect, setRedirect] = useState(false);
+  const [removedFromCart, setRemovedFromCart] = useState([]);
   const [completeOrder, setCompleteOrder] = useState([]);
   const [completeOrderId, setCompleteOrderId] = useState();
+
+  useEffect(() => {
+    const itemsToRemove = [];
+    collectionIds.forEach(item => {
+      if (Object.keys(cartObj).includes(item)) {
+        itemsToRemove.push(cartObj[item].title);
+        dispatch(removeFromCart(item));
+      }
+    })
+    setRemovedFromCart([...itemsToRemove]);
+  }, [])
 
   const cartTotal = cart.reduce((total, ele) => {
     let price = parseFloat(ele.price);
@@ -123,9 +159,18 @@ function CheckoutPage () {
     <div className="divider"/>
     <Container className="checkout__container">
       <div className="checkout__games">
-        <span>YOUR ORDER (TODO: different interface when no items in cart and direct users to store page!)</span>
+        <span>YOUR ORDER</span>
+        <div className={cart.length > 0 ? "hidden" : ""}>
+          <Alert
+            variant="info"
+            style={{ justifySelf: "center", width: "600px" }}>
+              <Alert.Heading>Your cart is empty!</Alert.Heading>
+              <p>Head to our <Link to="/games">store</Link> and add some great games to your cart!</p>
+          </Alert>
+        </div>
+        {removedFromCart.length > 0 ? <RemovedFromCartAlert games={removedFromCart} /> : null}
         {cart.map(item => <CartItem key={item.id} item={item}/>)}
-        <div className="checkout__game-card">
+          <div className="checkout__game-card">
           <div className="checkout__order-total">
             <div className="checkout total">
               <strong>ORDER TOTAL: </strong>
@@ -142,7 +187,7 @@ function CheckoutPage () {
           </div>
         </div>
       </div>
-      <div className="checkout__payment-sidebar">
+        <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
         <div>
             <p>:-)</p>
@@ -154,7 +199,8 @@ function CheckoutPage () {
                 block
                 variant="success"
                 onClick={checkout}
-                style={{ margin: "10px"}}>
+                style={{ margin: "10px"}}
+                disabled={cart.length == 0}>
                 PAY FOR YOUR ORDER NOW
               </Button>
             </div>

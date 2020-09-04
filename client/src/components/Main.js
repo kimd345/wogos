@@ -17,7 +17,7 @@ function Main (props) {
         <>
         <div className="divider" />
         <Container>
-            <i class="fa fa-thumb-tack"/>
+            <i className="fa fa-thumb-tack"/>
             <span style={{ marginLeft: "8px", fontWeight: "600" }}>
                 Highlights
             </span>
