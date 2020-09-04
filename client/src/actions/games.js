@@ -23,3 +23,17 @@ const build_params = (features, genres) => {
   else if (gens) return `?genres=${gens.join(',')}`
   else return ''
 }
+
+
+export const postReview = async (data) => {
+  try {
+    const res = await fetch(`${apiUrl}/reviews/`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+  } catch (e) {
+    console.log(e)
+  }
+
+}

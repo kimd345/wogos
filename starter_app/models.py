@@ -141,6 +141,7 @@ class Review(db.Model):
             "game_id": self.game_id,
             "title": self.title,
             "body": self.body,
+            "user": self.user.username,
             "star_rating": self.star_rating,
             "verified": self.verified
         }
