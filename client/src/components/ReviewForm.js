@@ -12,7 +12,6 @@ const ReviewForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(user)
     postReview({
       'user_id': user.id,
       'game_id': gameID,
@@ -20,6 +19,10 @@ const ReviewForm = props => {
       'body': body,
       'star_rating': rating
     })
+    setRating(1)
+    setBody('')
+    setTitle('')
+    props.setNewReview(true)
   }
 
   return (
