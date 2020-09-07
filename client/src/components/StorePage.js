@@ -41,15 +41,10 @@ function StorePage(props) {
         <>
             <div className="divider"></div>
             <Container>
-                <div>
-                    SEARCH BAR
-            </div>
-                <div>
-                    tabs
+            <div className="divider">
             </div>
                 <div className="store-container">
                     <div className="store-container__left">
-                        <br />
                         <span>Genre</span>
                         <ul>
                             <li><input type="checkbox" onChange={handleGenreChange} value='action'></input> Action</li>

@@ -48,7 +48,7 @@ function GameCard ({ game }) {
             <div className="game-card__title">{title}</div>
             <div className={hovered ? "game-card__info-hovered" : "game-card__info"}>
                 <div className={hovered ? "game-card__os hidden" : "game-card__os"}>
-                    <i className="fa fa-windows"></i>
+                    <i className="fa fa-windows" style={{fontSize: "12px", color: "grey"}}></i>
                 </div>
                 <div className="game-card__buyblock">
                     <div className="game-card__buyblock-price"
