@@ -34,9 +34,11 @@ function NavigationHeader (props) {
                     <div className="navbar__items">
                         <Link to="/games">STORE</Link>
                     </div>
+                    {loggedIn
+                    ?
                     <div className="navbar__items">
-                        <Link to="/about">ABOUT</Link>
-                    </div>
+                        <Link to="/collection">COLLECTION</Link>
+                    </div> : null}
                     <div className="navbar__items login-logout">
                         {loggedIn
                             ? <Logout />
@@ -51,9 +53,9 @@ function NavigationHeader (props) {
                             <div className={pulseClass}> {cartAmount}</div>
                         </Link>
                     </div>
-                    <div className="navbar__items">
+                    {/* <div className="navbar__items">
                         <i className='fa fa-search search-icon' />
-                    </div>
+                    </div> */}
                 </div>
             </Container>
         </div>

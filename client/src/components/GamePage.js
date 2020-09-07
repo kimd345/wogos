@@ -68,7 +68,7 @@ function GamePage() {
               block
               onClick={() => dispatch(addToCart(gameId))}>
               {inCollection
-                ? "This game is alredy in your collection."
+                ? "This game is already in your collection."
                 : <><i className="fa fa-cart-plus" /><span> Add to cart</span></>}
               </Button>
           }

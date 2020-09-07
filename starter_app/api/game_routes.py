@@ -17,9 +17,9 @@ def game(id):
 
 @game_routes.route('/ids=<ids>')
 def many_games(ids):
-    lol = ids.split(',')
-    print(lol)
-    return "lol"
+    ids_list = ids.split(',')
+    games = [Game.query.get(id).to_dict() for id in ids_list]
+    return {"games": games}
 
 @game_routes.route('/page/<pid>')
 def games_by_page(pid):
