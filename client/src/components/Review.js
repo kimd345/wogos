@@ -16,16 +16,3 @@ const Review = (review) => {
 }
 
 export default Review
-
-{/* <>
-<div>
-  <div>
-    <h1>{title}</h1>
-    <p>By: {user}</p>
-  </div>
-  <div>
-    <p>{body}</p>
-  </div>
-  <p>Rating: </p>
-</div>
-</> */}
