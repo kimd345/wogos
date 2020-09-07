@@ -37,26 +37,40 @@ function GamePage() {
     <>
       <Container>
         <div className="game-page__buy-block">
-          {game.sale ? `-${game.sale}%` : null}
           <div>
-            <span><strike>${game.price}</strike></span>
-            <h2>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
+            <span style={{
+              fontSize: "24px",
+              fontWeight: "600",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "purple",
+              color: "white",
+              position: "absolute"}}>{game.sale ? `-${game.sale}%` : null}</span>
+            <div style={{textAlign: "right"}}>
+              <span><strike>${game.price}</strike></span>
+              <h2 style={{fontWeight: "600"}}>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
+            </div>
           </div>
           {inCart
             ? <Button
+              disabled={inCollection}
               variant="success"
-              size="lg"
+              style={{height: "65px"}}
               block>
               <Link to="/checkout" style={{ color: "white" }}>
                 <i className="fa fa-shopping-cart" /> Check out now
               </Link>
             </Button>
             : <Button
+              disabled={inCollection}
               variant="success"
+              style={{ height: "65px" }}
               block
               onClick={() => dispatch(addToCart(gameId))}>
-              <i className="fa fa-cart-plus" /> Add to cart
-          </Button>
+              {inCollection
+                ? "This game is alredy in your collection."
+                : <><i className="fa fa-cart-plus" /><span> Add to cart</span></>}
+              </Button>
           }
         </div>
       </Container>

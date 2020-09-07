@@ -15,6 +15,11 @@ def game(id):
     response = Game.query.get(id)
     return response.to_dict()
 
+@game_routes.route('/ids=<ids>')
+def many_games(ids):
+    lol = ids.split(',')
+    print(lol)
+    return "lol"
 
 @game_routes.route('/page/<pid>')
 def games_by_page(pid):
