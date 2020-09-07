@@ -12,6 +12,7 @@ import StorePage from './components/StorePage';
 import GamePage from './components/GamePage';
 import CheckoutPage from './components/CheckoutPage';
 import OrderCompletePage from './components/OrderCompletePage';
+import CollectionPage from './components/CollectionPage';
 
 import { loadCart } from './actions/cart'
 import { loadCurrentUserCollection } from './actions/collection'
@@ -76,6 +77,7 @@ function App() {
             <Route path="/checkout">
                 <CheckoutPage />
             </Route>
+            <PrivateRoute path='/collection' needLogin={needLogin} component={CollectionPage} />      
             {/* <PrivateRoute path='/checkout' needLogin={needLogin} component={CheckoutPage} /> */}      
             <Route path="/login">
                 <Login />

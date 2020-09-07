@@ -38,7 +38,7 @@
     position: absolute;
     max-width: 255px;
     overflow-wrap: normal;
-    padding: 8px 16px 0px 16px;
+    padding: 10px 16px 0px 16px;
 }
 
 .game-card__os {

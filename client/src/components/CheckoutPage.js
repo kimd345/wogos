@@ -15,17 +15,19 @@ function RemovedFromCartAlert ({ games }) {
   if (!show) return null;
 
   return (
-    <Alert
-      dismissible
-      variant="warning"
-      onClose={() => setShow(false)}
-      style={{ width: "600px"}}>
-      <Alert.Heading>{games.length} item(s) removed from cart</Alert.Heading>
-      <p>Removed the following items from your cart because they already exist in your collection.</p>
-      <ul>
-        {games.map(game => <li>{game}</li>)}
-      </ul>
-    </Alert>
+    <div>
+      <Alert
+        dismissible
+        variant="warning"
+        onClose={() => setShow(false)}
+        style={{ width: "600px"}}>
+        <Alert.Heading>{games.length} item(s) removed from cart</Alert.Heading>
+        <p>Removed the following items from your cart because they already exist in your collection.</p>
+        <ul>
+          {games.map(game => <li>{game}</li>)}
+        </ul>
+      </Alert>
+    </div>
   )
 }
 
@@ -64,8 +66,7 @@ function CartItem ({ item }) {
               <div>{formatter.format(price - price * (sale / 100))}</div>
               </>
             :
-              <span>${price}</span>
-          }
+              <span>${price}</span>}
         </div>
       </div>
     </div>
