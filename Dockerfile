@@ -1,11 +1,11 @@
-FROM idbentley/flask-react-dev:latest as base
+# FROM idbentley/flask-react-dev:latest as base
+FROM nikolaik/python-nodejs:python3.8-nodejs14 as base
 
 WORKDIR /var/www
 COPY . .
 
 # Install Python Dependencies
 RUN ["pip", "install", "-r", "requirements.txt"]
-
 
 # Build our React App
 RUN ["npm", "install", "--prefix", "client"]
