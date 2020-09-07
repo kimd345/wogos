@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { postReview } from '../actions/games'
+import { Form, Button, Container } from 'react-bootstrap'
 
 const ReviewForm = props => {
   const [title, setTitle] = useState('')
@@ -26,18 +27,30 @@ const ReviewForm = props => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" placeholder='Title' value={title} onChange={e => setTitle(e.target.value)}></input>
-      <input type='text' placeholder='Body' value={body} onChange={e => setBody(e.target.value)}></input>
-      <select placeholder="Rating" value={rating} onChange={e => setRating(e.target.value)}>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit">Submit</button>
-    </form>
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="reviewForm.ControlInput1">
+          <Form.Label>Subject:</Form.Label>
+          <Form.Control type="text" placeholder='Title' value={title} onChange={e => setTitle(e.target.value)}></Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Game Rating:</Form.Label>
+          <Form.Control as="select" value={rating} onChange={e => setRating(e.target.value)}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="reviewForm.controlTextarea1">
+          <Form.Label>Review:</Form.Label>
+          <Form.Control as="textarea" rows="3" placeholder='Leave your review here!' value={body} onChange={e => setBody(e.target.value)}>
+          </Form.Control>
+        </Form.Group>
+        <Button variant="primary" type="submit">Submit</Button>
+      </Form>
+    </Container>
   )
 }
 
