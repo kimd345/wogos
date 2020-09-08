@@ -1,5 +1,22 @@
+.container {
+	z-index: 1;
+}
+
+input {
+	background-color:rgba(0, 0, 0, 0);
+	color: white;
+	border: none;
+	border-bottom: 1px solid rgb(72,72,72)
+}
+
+input:focus {
+	outline: none;
+}
+
 /* Results */
 .results-container {
+	position: fixed;
+	top: 60px;
   display: flex;
   flex-flow: column;
   width: 800px;

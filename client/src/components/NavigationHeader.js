@@ -46,6 +46,8 @@ function NavigationHeader (props) {
                             ? <Logout />
                             : <Link to="/login">SIGN IN</Link>}
                     </div>
+                </div>
+                <div className="navbar__left">
                     <Search />
                 </div>
                 <div className="navbar__right">
