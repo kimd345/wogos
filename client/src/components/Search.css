@@ -54,7 +54,7 @@ input:focus {
 .search-loading {
   position: absolute;
   top: 200px;
-	left: 0;
+	left: 800px;
 	right: 0;
 	margin: auto;
 }

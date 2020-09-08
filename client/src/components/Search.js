@@ -85,7 +85,7 @@ class Search extends React.Component {
         {/*Error Message*/}
           {message && <p className='message'>{message}</p>}
         {/*Loader*/}
-        <img src={loader} className={`search-loading ${ loading ? 'show' : 'hide'}`} alt='' />
+        <img src={loader} className={`search-loading ${ loading ? 'show' : 'hide'}`} alt='' style={{}} />
         {/*Results*/}
           { this.renderSearchResults()}
       </div>
