@@ -69,8 +69,8 @@ export const signup = (username, email, password) => async dispatch => {
     const { token, user } = await response.json();
     window.localStorage.setItem(TOKEN_KEY, token);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
-    dispatch(setToken(token));
     dispatch(setUser(user));
+    dispatch(setToken(token));
   } else {
     const msg = await response.json();
     console.log(msg);

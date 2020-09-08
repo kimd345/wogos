@@ -77,8 +77,7 @@ function App() {
             <Route path="/checkout">
                 <CheckoutPage />
             </Route>
-            <PrivateRoute path='/collection' needLogin={needLogin} component={CollectionPage} />      
-            {/* <PrivateRoute path='/checkout' needLogin={needLogin} component={CheckoutPage} /> */}      
+            <PrivateRoute path='/collection' needLogin={needLogin} component={CollectionPage} />     
             <Route path="/login">
                 <Login />
             </Route>

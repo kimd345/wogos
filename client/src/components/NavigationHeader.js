@@ -30,7 +30,7 @@ function NavigationHeader (props) {
                 <div className="navbar__left">
                     <div className="navbar__items">
                         <Link to="/">
-                                <img src='client/public/favicon.ico' alt='' />
+                                HOME
                         </Link>
                     </div>
                     <div className="navbar__items">
