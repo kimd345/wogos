@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+
 import { login } from '../actions/auth';
 
 function Login() {
@@ -23,19 +25,22 @@ function Login() {
 
     return (
         <main>
-            <form onSubmit={handleSubmit} style={{padding:'100px'}}>
-                <input 
-                    placeholder='Email' 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)} />
-                <input
-                    type='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit'>Log In</button>
-            </form>
-            <button onClick={handleDemoLogin}>Demo Login</button>
+            <Form onSubmit={handleSubmit} style={{padding:'100px'}}>
+                <Form.Group style={{width:'300px'}}>
+                    <Form.Control 
+                        placeholder='Email' 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
+                    <Form.Control
+                        type='password'
+                        placeholder='Password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
+                    <Button type='submit' style={{ backgroundColor: 'purple', border: '0px', margin: '5px' }}>Log In</Button>
+                    <Button onClick={handleDemoLogin} style={{ backgroundColor: 'purple', border: '0px', margin: '5px' }}>Demo Login</Button>
+                    <Link to='/signup' style={{ marginLeft: '20px'}}>Sign Up</Link>
+                </Form.Group>
+            </Form>
         </main>
     );
 };

@@ -29,7 +29,9 @@ function NavigationHeader (props) {
             <Container className="navbar__container">
                 <div className="navbar__left">
                     <div className="navbar__items">
-                        <Link to="/">ICON</Link>
+                        <Link to="/">
+                                HOME
+                        </Link>
                     </div>
                     <div className="navbar__items">
                         <Link to="/games">STORE</Link>
@@ -44,6 +46,8 @@ function NavigationHeader (props) {
                             ? <Logout />
                             : <Link to="/login">SIGN IN</Link>}
                     </div>
+                </div>
+                <div className="navbar__left">
                     <Search />
                 </div>
                 <div className="navbar__right">

@@ -72,20 +72,20 @@ class Search extends React.Component {
       <div className='container'>
         {/*Search Input*/}
         <label className='search-label' htmlFor='search-input'>
-          <i className='fa fa-search search-icon' />
+          <i className='fa fa-search search-icon' style={{marginRight: '10px'}} />
           <input
             type='text'
             name='query'
             value={query}
             id='search-input'
-            placeholder='Search...'
+            placeholder=''
             onChange={this.handleOnInputChange}
           />
         </label>
         {/*Error Message*/}
           {message && <p className='message'>{message}</p>}
         {/*Loader*/}
-        <img src={loader} className={`search-loading ${ loading ? 'show' : 'hide'}`} alt='' />
+        <img src={loader} className={`search-loading ${ loading ? 'show' : 'hide'}`} alt='' style={{}} />
         {/*Results*/}
           { this.renderSearchResults()}
       </div>

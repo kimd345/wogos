@@ -5,6 +5,7 @@
 
 .carousel {
     height: 480px;
+    z-index: 0;
 }
 
 .carousel > div {
