@@ -1,12 +1,13 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import (
-  jwt_required, create_access_token, get_jwt_identity
+    jwt_required, create_access_token, get_jwt_identity
 )
 from flask_login import current_user, login_user, logout_user
 
 from starter_app.models import db, User
 
 session = Blueprint('session', __name__)
+
 
 @session.route('', methods=['PUT', 'POST', 'DELETE'])
 def auth():
@@ -46,10 +47,10 @@ def auth():
     db.session.commit()
 
     user_dict = {
-      'id': user.id,
-      'username': user.username,
-      'email': user.email,
-      'hashed_password': user.hashed_password,
-      'session_token': user.session_token,
-      }
+        'id': user.id,
+        'username': user.username,
+        'email': user.email,
+        'hashed_password': user.hashed_password,
+        'session_token': user.session_token,
+    }
     return jsonify({'user': user_dict, 'token': access_token}), 200
