@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Container from 'react-bootstrap/esm/Container';
 import Logout from './Logout';
 import Search from './Search';
+import SignInModal from './SignInModal';
 
 function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
@@ -41,10 +42,10 @@ function NavigationHeader (props) {
                     <div className="navbar__items">
                         <Link to="/collection">COLLECTION</Link>
                     </div> : null}
-                    <div className="navbar__items login-logout">
+                    <div className="navbar__items">
                         {loggedIn
                             ? <Logout />
-                            : <Link to="/login">SIGN IN</Link>}
+                            : <SignInModal />}
                     </div>
                 </div>
                 <div className="navbar__left">

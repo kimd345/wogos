@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import UserList from './components/UsersList';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
 
 import NavigationHeader from './components/NavigationHeader'
 import Main from './components/Main';
@@ -77,13 +75,7 @@ function App() {
             <Route path="/checkout">
                 <CheckoutPage />
             </Route>
-            <PrivateRoute path='/collection' needLogin={needLogin} component={CollectionPage} />     
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/signup">
-                <SignUp />
-            </Route>
+            <PrivateRoute path='/collection' needLogin={needLogin} component={CollectionPage} />
             <Route path="/users">
                 <UserList />
             </Route>

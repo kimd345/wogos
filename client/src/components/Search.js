@@ -53,7 +53,21 @@ class Search extends React.Component {
                 <div className='image-wrapper'>
                   <img className='result-image' src={result.image_url} alt='' />
                 </div>
-                <h6 className='result-title'>{result.title}</h6>
+                <div className='result-text-container'>
+                  <h6 className='result-title'>{result.title}</h6>
+                  <h6 className='result-subtitle'>
+                    {result.genres.slice(0,2).map(genreObj => {
+                      return genreObj.genre
+                    }).join(', ')}
+                    {' | '}
+                    {result.features.slice(0,2).map(featureObj => {
+                      return featureObj.feature
+                    }).join(', ')}
+                  </h6>
+                </div>
+                <div className='result-price-container'>
+                  <h6 className='result-price-label'>${result.price}</h6>
+                </div>
               </Link>
             )
           })}
