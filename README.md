@@ -1,6 +1,6 @@
 <p align="right">
    <a href="https://wogos.herokuapp.com/">
-      <img src="client/assets/logo.png" style="height: 81px" alt="wogos"/>
+      <img src="client/assets/readme/logo.png" style="height: 81px" alt="wogos"/>
    </a>
 </p>
 
@@ -12,7 +12,16 @@
 
 Welcome to wogos! wogos is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. However, wogos is partial to Windows and only features games available on Windows.
 
+![ Home Page ](client/assets/readme/homescreenshot.png)
+
 ---
+
+### wogos uses the following technologies:
+
+- Frontend - JavaScript | React | Redux
+- Backend - Python | Flask
+- Database - PostgreSQL
+- Design - HTML5 / CSS
 
 ---
 
