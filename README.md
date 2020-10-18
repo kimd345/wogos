@@ -12,7 +12,7 @@
 
 Welcome to WOGOS! WOGOS is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. However, WOGOS is partial to Windows and only features games available on Windows.
 
-![ Home Page ](client/assets/readme/homescreenshot.png)
+![ Home Page ](documentation/homescreenshot.png)
 
 ---
 
