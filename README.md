@@ -25,49 +25,6 @@ Welcome to WOGOS! WOGOS is a single page application made with React / Redux, Fl
 
 ---
 
-## Features<br>
-
-<img margin-right="50px" src="client/assets/readme/signupscreenshot.png" align="right" height="400px" > <br><br><br><br>
-
-- Create an account with username, email and password protected with SHA-256 encryption.
-  <br><br>
-
-- Log in as a demo user to experience full features.
-  <br><br>
-
-- Or browse content and add to cart without signing in, but authentication is required for checkout and leaving reviews.
-  <br><br>
-
-<br><br><br><br>
-<img src="app/assets/images/readme/livechat.gif" align="left" width="650px">
-<br><br>
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
 # Planning
 
 Plan:
