@@ -10,7 +10,7 @@
 
 ---
 
-Welcome to wogos! wogos is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. However, wogos is partial to Windows and only features games available on Windows.
+Welcome to WOGOS! WOGOS is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. However, WOGOS is partial to Windows and only features games available on Windows.
 
 ![ Home Page ](client/assets/readme/homescreenshot.png)
 
@@ -24,6 +24,23 @@ Welcome to wogos! wogos is a single page application made with React / Redux, Fl
 - Design - HTML5 / CSS
 
 ---
+
+## Features<br>
+
+<img margin-right="50px" src="client/assets/readme/signupscreenshot.png" align="right" height="400px" > <br><br><br><br>
+
+- Create an account with username, email and password protected with SHA-256 encryption.
+  <br><br>
+
+- Log in as a demo user to experience full features.
+  <br><br>
+
+- Or browse content and add to cart without signing in, but authentication is required for checkout and leaving reviews.
+  <br><br>
+
+<br><br><br><br>
+<img src="app/assets/images/readme/livechat.gif" align="left" width="650px">
+<br><br>
 
 ---
 
