@@ -1,3 +1,47 @@
+<p align="right">
+   <a href="https://wogos.herokuapp.com/">
+      <img src="client/assets/logo.png" style="height: 81px" alt="wogos"/>
+   </a>
+</p>
+
+---
+
+### An e-commerce platform for video games
+
+---
+
+Welcome to wogos! wogos is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. However, wogos is partial to Windows and only features games available on Windows.
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
 # Planning
 
 Plan:
@@ -23,11 +67,10 @@ This is the backend for the Flask React project.
 4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file with CREATEDB privileges
 
 5. Run
-   * `pipenv run database.py`
-   * `pipenv run flask run`
+   - `pipenv run database.py`
+   - `pipenv run flask run`
 
 To run the React Client application, checkout the readme inside the client directory.
-
 
 ## Deploy to Heroku
 
@@ -36,11 +79,13 @@ To run the React Client application, checkout the readme inside the client direc
 3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
 4. Run `$ heroku login`
 5. Login to the heroku container registry `$ heroku container:login`
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.  This should be the full URL of your react app: i.e. "https://flask-react-aa.herokuapp.com"
+6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile. This should be the full URL of your react app: i.e. "https://flask-react-aa.herokuapp.com"
 7. Push your docker container to heroku (this will build the dockerfile, and push) `$ heroku container:push web -a {NAME_OF_HEROKU_APP}`
 8. Release your docker container to heroku `$ heroku container:release web -a {NAME_OF_HEROKU_APP}`
 9. set up your database:
+
 ```bash
     $ heroku run python -m database
 ```
+
 10. profit
