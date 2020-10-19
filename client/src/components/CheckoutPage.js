@@ -191,7 +191,6 @@ function CheckoutPage () {
         <div className="checkout__payment-sidebar">
         <span>YOUR PAYMENT DETAILS</span>
         <div>
-            <p>:-)</p>
             <div style={{ display: "flex"}}>
               <div style={{ fontSize: "25px", padding: "10px", fontWeight: "600"}}>
                 {formatter.format(cartTotal)}
@@ -201,7 +200,7 @@ function CheckoutPage () {
                 variant="success"
                 onClick={checkout}
                 style={{ margin: "10px"}}
-                disabled={cart.length == 0}>
+                disabled={cart.length === 0}>
                 PAY FOR YOUR ORDER NOW
               </Button>
             </div>

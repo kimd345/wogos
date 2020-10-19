@@ -13,8 +13,9 @@ export const clearCollection = () => ({
 })
 
 export const loadCurrentUserCollection = (userId) => async dispatch => {
-  const response = await fetch(`${apiUrl}/users/${userId}`);;
+  const response = await fetch(`${apiUrl}/users/${userId}`);
   const res = await response.json();
+  console.log(res);
   const collection = {};
   res.orders.forEach(order => collection[order.game_id] = order);
   dispatch(loadCollectionAction(collection))

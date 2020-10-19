@@ -43,12 +43,9 @@ function App() {
     useEffect(() => {
         dispatch(loadToken());
         dispatch(loadUser());
+        dispatch(loadCart())
         setLoaded(true);
     }, [dispatch]);
-    
-    useEffect(() => {
-        dispatch(loadCart())
-    }, [dispatch])
 
     useEffect(() => {
         if (user) {

@@ -17,6 +17,7 @@ function GamePage() {
   const gameId = useParams().id;
   const [game, setGame] = useState({});
   const [newReview, setNewReview] = useState(false)
+  const [loaded, setLoaded] = useState(false)
   const user = useSelector(state => state.auth.user)
   const inCart = useSelector(state => state.cart.items[gameId] !== undefined);
   const inCollection = useSelector(state => state.collection[gameId] !== undefined)
@@ -29,15 +30,21 @@ function GamePage() {
         const responseData = await response.json();
         setGame(responseData);
       }
+      setLoaded(true);
     }
     fetchData();
   }, [gameId, newReview])
 
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <>
-      <Container>
+      <Container style={{ position: "relative" }}>
         <div className="game-page__buy-block">
           <div>
+            {game.sale &&
             <span style={{
               fontSize: "24px",
               fontWeight: "600",
@@ -46,9 +53,9 @@ function GamePage() {
               backgroundColor: "purple",
               color: "white",
               position: "absolute"
-            }}>{game.sale ? `-${game.sale}%` : null}</span>
+            }}>-{game.sale}%</span>}
             <div style={{ textAlign: "right" }}>
-              <span><strike>${game.price}</strike></span>
+              <div><strike>{game.sale ? `$${game.price}` : <br/>}</strike></div>
               <h2 style={{ fontWeight: "600" }}>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
             </div>
           </div>

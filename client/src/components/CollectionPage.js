@@ -12,7 +12,7 @@ function CollectionPage () {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(`${apiUrl}/games/ids=${collectionIds.join(",")}`)
+      // console.log(`${apiUrl}/games/ids=${collectionIds.join(",")}`)
       const response = await fetch(`${apiUrl}/games/ids=${collectionIds.join(",")}`);
       const responseData = await response.json();
       setCollection(responseData.games);
