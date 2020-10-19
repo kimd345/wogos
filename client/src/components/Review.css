@@ -1,0 +1,27 @@
+.review_card_container {
+  display: flex;
+  align-items: center;
+  max-width: 75%;
+  min-height: 150px;
+  background: #d9d9d9;
+  border: 1px solid hsla(0,0%,54%,.16);
+  margin-bottom: 10px;
+}
+
+.review_card_body_titleRating_container {
+  display: flex;
+  color: #212121;
+}
+
+.review_card_header_rating {
+  padding-right: 10px;
+}
+
+.review_card_body_title {
+  font-weight: bold;
+}
+
+.review_card_header_container {
+  padding: 10px;
+  margin: 10px;
+}

@@ -1,17 +1,22 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import Rating from './Rating'
+import './Review.css'
 
 const Review = (review) => {
-  const { title, body, star_rating, user } = review.props
+  const { id, title, body, star_rating, user } = review.props
   return (
-    <Card>
-      <Card.Header as="h5">{star_rating} out of 5 Stars!</Card.Header>
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>{body}</Card.Text>
-        <footer className="blockquote-footer">{user}</footer>
-      </Card.Body>
-    </Card>
+    <div className="review_card_container">
+      <div className="review_card_header_container">
+        <p className="review_card_header_user">{user}</p>
+      </div>
+      <div className="review_card_body_container">
+        <div className="review_card_body_titleRating_container">
+          <Rating stars={star_rating} user={id} />
+          <p className="review_card_body_title">{title}</p>
+        </div>
+        <p className="review_card_body_text">{body}</p>
+      </div>
+    </div>
   )
 }
 

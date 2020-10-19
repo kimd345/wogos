@@ -45,17 +45,18 @@ function GamePage() {
               borderRadius: "5px",
               backgroundColor: "purple",
               color: "white",
-              position: "absolute"}}>{game.sale ? `-${game.sale}%` : null}</span>
-            <div style={{textAlign: "right"}}>
+              position: "absolute"
+            }}>{game.sale ? `-${game.sale}%` : null}</span>
+            <div style={{ textAlign: "right" }}>
               <span><strike>${game.price}</strike></span>
-              <h2 style={{fontWeight: "600"}}>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
+              <h2 style={{ fontWeight: "600" }}>{formatter.format(game.price - game.price * (game.sale / 100))}</h2>
             </div>
           </div>
           {inCart
             ? <Button
               disabled={inCollection}
               variant="success"
-              style={{height: "65px"}}
+              style={{ height: "65px" }}
               block>
               <Link to="/checkout" style={{ color: "white" }}>
                 <i className="fa fa-shopping-cart" /> Check out now
@@ -70,7 +71,7 @@ function GamePage() {
               {inCollection
                 ? "This game is already in your collection."
                 : <><i className="fa fa-cart-plus" /><span> Add to cart</span></>}
-              </Button>
+            </Button>
           }
         </div>
       </Container>
@@ -104,7 +105,7 @@ function GamePage() {
           </div>
         </div>
         <div className="game-page__info reviews">
-          <h6>Reviews</h6>
+          <h6>User reviews</h6>
           {game.reviews ? game.reviews.map(review => <Review key={review.id} props={review} />) : null}
         </div>
         <div className="game-page__info reviews-form">
