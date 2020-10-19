@@ -36,16 +36,18 @@ return (
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent:"center" }}>
         {items.map(item =>
-        <div className="game-card" style={{ width: "200px" }}>
-          <div className="game-card__pic"
-            style={{
-              backgroundImage: `url(${item.image_url})`,
-              height: "140px"}} />
-          <div className="game-card__title"
-            style={{ fontWeight: "600" }}>
-            {item.title}
+        <Link to={`/game/${item.id}`}>
+          <div className="game-card" style={{ width: "200px" }}>
+            <div className="game-card__pic"
+              style={{
+                backgroundImage: `url(${item.image_url})`,
+                height: "140px"}} />
+            <div className="game-card__title"
+              style={{ fontWeight: "600" }}>
+              {item.title}
+            </div>
           </div>
-        </div>)}
+        </Link>)}
       </div>
     </Container>
 )
