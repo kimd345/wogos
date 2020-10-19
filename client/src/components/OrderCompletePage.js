@@ -23,12 +23,12 @@ return (
       <div style={{ textAlign: "center" }}>
         <div style={{ marginTop: "100px" }} />
         <h1><i className="fa fa-check-circle-o" style={{ color: "#80AC02"}}/> ORDER SUCCESS!</h1>
-        <span style={{ fontSize: "12px", color: "gray" }}>#{id}</span>
+        <span style={{ fontSize: "12px", color: "gray" }}>Your invoice id: #{id}</span>
         <p style={{ padding: "10px" }}>
           Thank you for your purchase, {user.username}.
           The following games are now in your&nbsp;
           <Link
-            to=""
+            to="/collection"
             style={{textDecoration: "underline"}}>
               collection
           </Link>!
