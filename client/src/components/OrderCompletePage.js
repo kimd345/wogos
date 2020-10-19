@@ -23,12 +23,12 @@ return (
       <div style={{ textAlign: "center" }}>
         <div style={{ marginTop: "100px" }} />
         <h1><i className="fa fa-check-circle-o" style={{ color: "#80AC02"}}/> ORDER SUCCESS!</h1>
-        <span style={{ fontSize: "12px", color: "gray" }}>#{id}</span>
+        <span style={{ fontSize: "12px", color: "gray" }}>Your invoice id: #{id}</span>
         <p style={{ padding: "10px" }}>
           Thank you for your purchase, {user.username}.
           The following games are now in your&nbsp;
           <Link
-            to=""
+            to="/collection"
             style={{textDecoration: "underline"}}>
               collection
           </Link>!
@@ -36,16 +36,18 @@ return (
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent:"center" }}>
         {items.map(item =>
-        <div className="game-card" style={{ width: "200px" }}>
-          <div className="game-card__pic"
-            style={{
-              backgroundImage: `url(${item.image_url})`,
-              height: "140px"}} />
-          <div className="game-card__title"
-            style={{ fontWeight: "600" }}>
-            {item.title}
+        <Link to={`/game/${item.id}`}>
+          <div className="game-card" style={{ width: "200px" }}>
+            <div className="game-card__pic"
+              style={{
+                backgroundImage: `url(${item.image_url})`,
+                height: "140px"}} />
+            <div className="game-card__title"
+              style={{ fontWeight: "600" }}>
+              {item.title}
+            </div>
           </div>
-        </div>)}
+        </Link>)}
       </div>
     </Container>
 )
