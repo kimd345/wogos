@@ -10,9 +10,15 @@
     padding: 0px;
 }
 
+.store-container__left > ul > li > input {
+  padding: 5px;
+  width: 20px;
+}
+
 .store-container__right {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .store__pagination {

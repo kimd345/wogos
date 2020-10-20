@@ -5,20 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import './Main.css'
 import GameCard from './GameCard'
-import topGames from './topGames'
 
 import { apiUrl, formatter } from '../config';
-import { useSelector } from 'react-redux';
 
 function Main(props) {
     const [index, setIndex] = useState(0);
     const [carousel, setCarousel] = useState([]);
-
-    const collection = useSelector(state => state.collection)
-    const cart = useSelector(state => state.cart.items)
-
-    const gameCards = Object.values(topGames).map((game) =>
-        <GameCard key={game.id} game={game} />);
+    const [top, setTop] = useState([]);
 
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
@@ -26,9 +19,10 @@ function Main(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`${apiUrl}/games/ids=21,20,30,12,23`);
+            const response = await fetch(`${apiUrl}/games/ids=21,20,30,12,23,1,2,3,4,5,6,7,8`);
             const responseData = await response.json();
-            setCarousel(responseData.games);
+            setCarousel([...responseData.games.slice(0,6)]);
+            setTop([...responseData.games.slice(5)]);
         }
         fetchData();
     }, []);
@@ -59,14 +53,14 @@ function Main(props) {
                                     {item.title}
                                 </div>
                                 <div style={{display: "flex"}}>
-                                    <span style={{
+                                    {item.sale && <span style={{
                                         fontSize: "24px",
                                         fontWeight: "600",
                                         padding: "10px",
                                         borderRadius: "5px",
                                         backgroundColor: "purple",
                                         color: "white",
-                                    }}>{item.sale ? `-${item.sale}%` : null}</span>
+                                    }}>-${item.sale}%</span>}
                                     <h2 style={{ fontWeight: "600", alignSelf: "center", margin: "0px 20px" }}>
                                         {formatter.format(item.price - item.price * (item.sale / 100))}
                                     </h2>
@@ -91,7 +85,7 @@ function Main(props) {
                         Check out these hot titles!
                     </span>
                     <div className="main_top-games">
-                        {gameCards}
+                        {top.map(game => <GameCard game={game}/>)}
                     </div>
                 </div>
                 <div>

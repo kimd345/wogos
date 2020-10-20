@@ -10,10 +10,10 @@
   background-color: whitesmoke;
   position: absolute;
   padding: 15px;
-  width: 430px;
+  width: 440px;
   height: 190px;
   top: 575px;
-  right: 165px;
+  right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

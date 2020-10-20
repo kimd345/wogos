@@ -81,11 +81,15 @@ function StorePage(props) {
                     </div>
                     <div className="store-container__right">
                         {gameCards}
-                        <Pagination className="store__pagination">
-                            <Pagination.Item onClick={() => setPageNum(0)}>First</Pagination.Item>
-                            <Pagination.Item onClick={() => setPageNum(pageNum > 0 ? pageNum - 1 : 0)}>Previous</Pagination.Item>
-                            <Pagination.Item onClick={() => setPageNum(Object.keys(games).length < 24 ? pageNum : pageNum + 1)}>Next</Pagination.Item>
-                        </Pagination>
+
+                        {Object.keys(games).length >= 24 ? 
+                <Pagination className="store__pagination">
+                  <Pagination.Item onClick={() => setPageNum(0)}>First</Pagination.Item>
+                  <Pagination.Item onClick={() => setPageNum(pageNum > 0 ? pageNum - 1 : 0)}>Previous</Pagination.Item>
+                  <Pagination.Item onClick={() => setPageNum(Object.keys(games).length < 24 ? pageNum : pageNum + 1)}>Next</Pagination.Item>
+                </Pagination>
+                        : null}
+                        
                     </div>
                 </div>
             </Container>
