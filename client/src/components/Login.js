@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Modal } from 'react-bootstrap';
-import logo from '../logo.png';
+import logo from '../assets/logo.png';
 
 import { login } from '../actions/auth';
 

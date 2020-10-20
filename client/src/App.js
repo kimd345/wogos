@@ -15,6 +15,7 @@ import CollectionPage from './components/CollectionPage';
 import { loadCart } from './actions/cart'
 import { loadCurrentUserCollection } from './actions/collection'
 import { loadToken, loadUser } from './actions/auth';
+import Footer from './components/Footer';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
@@ -80,6 +81,7 @@ function App() {
                 <Main />
             </Route>
         </Switch>
+        <Footer />
     </BrowserRouter>
   );
 }
