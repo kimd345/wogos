@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Logout from './Logout';
 import Search from './Search';
 import SignInModal from './SignInModal';
+import logo from '../logo.png';
 
 function NavigationHeader (props) {
     const cartAmount = useSelector(state => Object.keys(state.cart.items).length)
@@ -29,6 +30,11 @@ function NavigationHeader (props) {
         <div className="navbar">
             <Container className="navbar__container">
                 <div className="navbar__left">
+                    <div className="navbar__items">
+                        <Link to="/">
+                            <img style={{width: '40px'}} src={logo} />
+                        </Link>
+                    </div>
                     <div className="navbar__items">
                         <Link to="/">
                                 HOME
