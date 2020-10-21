@@ -58,8 +58,8 @@ export default function () {
           </a>
         </div>
       </div>
-      <p style={styles.inspiredBy}>
-        Inspired by <a style={{color: 'lightpink'}} href="https://gog.com/">GOG.com</a>
+      <p style={{ color: '#999999' }}>
+        Inspired by <a style={{color: 'lightgray'}} href="https://gog.com/">GOG.com</a>
       </p>
     </div>
     :
@@ -72,48 +72,16 @@ export default function () {
   )
 }
 
-const bubbleStyles = {
-  container: {
-    position: 'fixed',
-    bottom: '20px',
-    right: '100px',
-  },
-  bubble: {
-    height: '75px',
-    width: '225px',
-    minWidth: '200px',
-    background: '#262626',
-    display: 'block',
-    margin: '0 auto',
-    borderRadius: '20px',
-    marginTop: '50px',
-    fontSize: '20px',
-    textAlign: 'center',
-  },
-  pointer: {
-    height: '30px',
-    width: '30px',
-    background: '#262626',
-    margin: '0 auto',
-    transform: 'rotate(45deg)',
-    marginTop: '-22px',
-    position: 'relative',
-    left: 'calc(0.5vw - 50px)',
-  },
-  text: {
-    color: '#999999',
-    fontWeight: '700',
-    lineHeight: '75px',
-  },
-};
-
 const styles = {
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     position: 'fixed',
     bottom: '0',
     right: '50px',
     width: '300px',
-    height: '200px',
+    height: '300px',
     backgroundColor: '#262626',
     borderRadius: '5px',
     padding: '10px',
@@ -122,7 +90,6 @@ const styles = {
     color: '#999999',
     fontWeight: '700',
     textAlign: 'center',
-    marginBottom: '15px',
   },
   profileContainer: {
     display: 'flex',
@@ -148,8 +115,39 @@ const styles = {
     color: 'purple',
     paddingLeft: '10px',
   },
-  inspiredBy: {
+};
+
+const bubbleStyles = {
+  container: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '100px',
+  },
+  bubble: {
+    height: '75px',
+    width: '250px',
+    minWidth: '200px',
+    background: '#262626',
+    display: 'block',
+    margin: '0 auto',
+    borderRadius: '30px',
+    marginTop: '50px',
+    fontSize: '20px',
+    textAlign: 'center',
+  },
+  pointer: {
+    height: '30px',
+    width: '30px',
+    background: '#262626',
+    margin: '0 auto',
+    transform: 'rotate(45deg)',
+    marginTop: '-22px',
+    position: 'relative',
+    left: 'calc(0.5vw - 50px)',
+  },
+  text: {
     color: '#999999',
-    marginTop: '15px',
+    fontWeight: '700',
+    lineHeight: '75px',
   },
 };
