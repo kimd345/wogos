@@ -21,7 +21,7 @@ class Search extends React.Component {
     if (response.ok) {
       const responseData = await response.json();
       const resultNotFoundMsg = ! responseData.search_results.length
-                              ? 'NO RESULTS FOUND. Try adjusting your search.'
+                              ? 'No results found'
                               : '';
       this.setState({ 
         results: responseData.search_results,
@@ -97,7 +97,13 @@ class Search extends React.Component {
           />
         </label>
         {/*Error Message*/}
-          {message && <p className='message'>{message}</p>}
+          {message && 
+          <p
+            style={{position: 'absolute', marginLeft: '290px', marginTop: '10px'}}
+            className='message'
+          >
+            {message}
+          </p>}
         {/*Loader*/}
         <img src={loader} className={`search-loading ${ loading ? 'show' : 'hide'}`} alt='' style={{}} />
         {/*Results*/}
