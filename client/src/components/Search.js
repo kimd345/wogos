@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Search.css';
-import loader from '../loader.gif'
+import loader from '../assets/loader.gif'
 import { apiUrl } from '../config'
 
 class Search extends React.Component {

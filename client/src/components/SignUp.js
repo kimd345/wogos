@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Modal } from 'react-bootstrap';
-import logo from '../logo.png';
+import logo from '../assets/logo.png';
 
 import { signup } from '../actions/auth';
 
@@ -97,6 +97,7 @@ const styles = {
   },
   logo: {
     width: '50px',
+    borderRadius: '10px',
   },
   body: {
     display: 'flex',
