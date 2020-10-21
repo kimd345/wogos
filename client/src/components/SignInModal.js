@@ -15,7 +15,7 @@ const SignInModal = () => {
         SIGN IN
       </a>
 
-      <Modal show={showSignIn} onHide={handleSignInClose} style={styles.modal}>
+      <Modal show={showSignIn} onHide={handleSignInClose}>
         <Modal.Header style={styles.header}>
           <div style={styles.buttonsContainer}>
             <SignUp />
