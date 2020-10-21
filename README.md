@@ -26,11 +26,11 @@ Welcome to WOGOS! WOGOS is a single page application made with React / Redux, Fl
 ---
 
 ## Features<br>
-<img margin-right="50px" src="documentation/1_auth.gif" align="right" width="600px" > <br><br><br><br><br>
+<img margin-right="50px" src="documentation/1_auth.gif" align="right" width="600px" > <br><br><br><br>
 ### Authentication<br>
 Create an account or use demo login, secure with JWT token and SHA-256 hashing<br><br>
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 <img src="documentation/2_faceted_filter.gif" align="left" width="600px"> 
 <br><br><br><br><br>
 ### Faceted Search Filters<br>
@@ -54,8 +54,8 @@ Add or remove items from your cart, and checkout items into your collection<br><
 <br><br><br><br>
 ### Product Reviews<br>
 Leave a review for items that you have purchased
-<br><br><br><br>
-<br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
 
 ---
 ### Schema
