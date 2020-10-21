@@ -14,51 +14,53 @@ export default function () {
   return (
     show ?
     <div style={styles.container}>
-      <i className="fa fa-times" style={{...styles.gitHubIcon, position: 'absolute', right: '10px' }} onClick={handleHide}/>
-      <h5 style={styles.title}>Feel free to reach out!</h5>
-      <div style={styles.profileContainer}>
-        <p style={styles.profileName}>Austin Burger</p>
-        <div style={styles.iconsContainer}>
-          <a href="https://github.com/about14sheep">
-            <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
-          </a>
-          <a href="https://www.linkedin.com/in/austin-burger/">
-            <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
-          </a>
+      <i className="fa fa-times-circle" style={styles.closeIcon} onClick={handleHide}/>
+      <h5 style={styles.title}>Reach out!</h5>
+      <div>
+        <div style={styles.profileContainer}>
+          <p style={styles.profileName}>Austin Burger</p>
+          <div style={styles.iconsContainer}>
+            <a href="https://github.com/about14sheep">
+              <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
+            </a>
+            <a href="https://www.linkedin.com/in/austin-burger/">
+              <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
+            </a>
+          </div>
+        </div>
+        <div style={styles.profileContainer}>
+          <p style={styles.profileName}>Cath Lee</p>
+          <div style={styles.iconsContainer}>
+            <a href="https://cathimn.github.io/" style={styles.gitHubIcon}>
+              <i className="fa fa-code"/>
+            </a>
+            <a href="https://angel.co/u/cathimn">
+              <i className="fa fa-angellist" style={styles.angelListIcon}/>
+            </a>
+            <a href="https://github.com/cathimn">
+              <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
+            </a>
+            <a href="https://www.linkedin.com/in/cath-lee/">
+              <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
+            </a>
+          </div>
+        </div>
+        <div style={styles.profileContainer}>
+          <p style={styles.profileName}>Dong Hyuk Kim</p>
+          <div style={styles.iconsContainer}>
+            <a href="https://angel.co/u/dong-hyuk-kim">
+              <i className="fa fa-angellist" style={styles.angelListIcon}/>
+            </a>
+            <a href="https://github.com/kimd345">
+              <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
+            </a>
+            <a href="https://www.linkedin.com/in/dong-hyuk-kim/">
+              <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
+            </a>
+          </div>
         </div>
       </div>
-      <div style={styles.profileContainer}>
-        <p style={styles.profileName}>Cath Lee</p>
-        <div style={styles.iconsContainer}>
-          <a href="https://cathimn.github.io/" style={styles.gitHubIcon}>
-            <i className="fa fa-code"/>
-          </a>
-          <a href="https://angel.co/u/cathimn">
-            <i className="fa fa-angellist" style={styles.angelListIcon}/>
-          </a>
-          <a href="https://github.com/cathimn">
-            <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
-          </a>
-          <a href="https://www.linkedin.com/in/cath-lee/">
-            <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
-          </a>
-        </div>
-      </div>
-      <div style={styles.profileContainer}>
-        <p style={styles.profileName}>Dong Hyuk Kim</p>
-        <div style={styles.iconsContainer}>
-          <a href="https://angel.co/u/dong-hyuk-kim">
-            <i className="fa fa-angellist" style={styles.angelListIcon}/>
-          </a>
-          <a href="https://github.com/kimd345">
-            <i className="fa fa-github-alt" style={styles.gitHubIcon}/>
-          </a>
-          <a href="https://www.linkedin.com/in/dong-hyuk-kim/">
-            <i className="fa fa-linkedin" style={styles.linkedInIcon}/>
-          </a>
-        </div>
-      </div>
-      <p style={{ color: '#999999' }}>
+      <p style={{ color: '#999999', fontSize: '13px' }}>
         Inspired by <a style={{color: 'lightgray'}} href="https://gog.com/">GOG.com</a>
       </p>
     </div>
@@ -78,12 +80,12 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     position: 'fixed',
-    bottom: '0',
+    bottom: '30px',
     right: '50px',
-    width: '300px',
-    height: '300px',
+    width: '250px',
+    height: '250px',
     backgroundColor: '#262626',
-    borderRadius: '5px',
+    borderRadius: '30px',
     padding: '10px',
   },
   title: {
@@ -103,6 +105,12 @@ const styles = {
   iconsContainer: {
     display: 'flex',
   },
+  closeIcon: {
+    color: 'white', 
+    position: 'absolute', 
+    right: '10px', 
+    top: '10px' 
+  },
   gitHubIcon: {
     color: 'white',
     paddingLeft: '10px',
@@ -121,7 +129,7 @@ const bubbleStyles = {
   container: {
     position: 'fixed',
     bottom: '20px',
-    right: '100px',
+    right: '50px',
   },
   bubble: {
     height: '75px',

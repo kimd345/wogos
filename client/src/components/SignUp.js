@@ -97,6 +97,7 @@ const styles = {
   },
   logo: {
     width: '50px',
+    borderRadius: '10px',
   },
   body: {
     display: 'flex',
