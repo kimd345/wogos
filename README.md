@@ -30,7 +30,7 @@ Welcome to WOGOS! WOGOS is a single page application made with React / Redux, Fl
 ### Authentication<br>
 Create an account or use demo login, secure with JWT token and SHA-256 hashing<br><br>
 
-<br><br><br><br>
+<br><br><br><br><br><br><br>
 <img src="documentation/2_faceted_filter.gif" align="left" width="600px"> 
 <br><br><br><br><br>
 ### Faceted Search Filters<br>
@@ -38,13 +38,13 @@ Create an account or use demo login, secure with JWT token and SHA-256 hashing<b
    Apply multiple filters across genres and features to your search results
 
 <br><br><br><br>
-<br><br><br><br>
+<br><br><br>
 <img margin-right="50px" src="documentation/3_dynamic_search.gif" align="right" width="600px" >
 <br><br><br><br><br>
 ### Dynamic Search Bar<br>
 Get recommended results as you type
 <br><br><br><br><br><br>
-<br><br><br><br><br>
+<br><br><br><br>
 <img src="documentation/4_cart_checkout.gif" align="left" width="600px"> <br><br><br><br>
 
 ### Shopping Cart <br>
