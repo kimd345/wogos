@@ -14,7 +14,7 @@ export default function () {
   return (
     show ?
     <div style={styles.container}>
-      <i className="fa fa-times-circle" style={styles.closeIcon} onClick={handleHide}/>
+      <i className="fa fa-times" style={styles.closeIcon} onClick={handleHide}/>
       <h5 style={styles.title}>Reach out!</h5>
       <div>
         <div style={styles.profileContainer}>
@@ -106,10 +106,10 @@ const styles = {
     display: 'flex',
   },
   closeIcon: {
-    color: 'white', 
+    color: 'lightgray', 
     position: 'absolute', 
-    right: '10px', 
-    top: '10px' 
+    right: '16px', 
+    top: '13px' 
   },
   gitHubIcon: {
     color: 'white',
