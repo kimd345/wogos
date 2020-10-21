@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Logout from './Logout';
 import Search from './Search';
 import SignInModal from './SignInModal';
-import logo from '../assets/logo.png';
+import logoWhite from '../assets/logoWhite.png';
 import topBarPurple from '../assets/topBarPurple.png';
 
 function NavigationHeader (props) {
@@ -33,7 +33,7 @@ function NavigationHeader (props) {
                 <div className="navbar__left">
                     <div className="navbar__items">
                         <Link to="/">
-                            <img style={{width: '40px'}} src={logo} />
+                            <img style={{width: '40px', borderRadius: '10px', marginRight: '20px'}} src={logoWhite} />
                         </Link>
                     </div>
                     <div className="navbar__items">
