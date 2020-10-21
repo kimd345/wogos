@@ -42,8 +42,8 @@ Create an account or use demo login, secure with JWT token and SHA-256 hashing<b
 <img margin-right="50px" src="documentation/3_dynamic_search.gif" align="right" width="650px" >
 <br><br><br><br><br>
 ### Dynamic Search Bar<br>
-Type into the search bar to get recommended results
-<br><br><br><br><br>
+Get recommended results as you type
+<br><br><br><br><br><br>
 <br><br><br><br><br>
 <img src="documentation/4_cart_checkout.gif" align="left" width="650px"> <br><br><br><br>
 
