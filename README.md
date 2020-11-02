@@ -10,7 +10,7 @@
 
 ---
 
-Welcome to WOGOS! [WOGOS](https://wogos.herokuapp.com/) is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. Our shameless mission is to grant Windows the monopoly in computer games.
+Welcome to WOGOS! [WOGOS](https://wogos.herokuapp.com/) is a single page application made with React / Redux, Flask, and PostgreSQL. It is inspired by [GOG](https://gog.com/), a popular digital distributor of video games. Our shameless mission is to endorse Windows to monopolize computer games.
 
 ![ Home Page ](documentation/homescreenshot.png)
 
