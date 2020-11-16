@@ -32,7 +32,7 @@ export default function () {
           <p style={styles.profileName}>Cath Lee</p>
           <div style={styles.iconsContainer}>
             <a href="https://cathimn.github.io/" style={styles.gitHubIcon}>
-              <i className="fa fa-code"/>
+              <i className="fa fa-briefcase"/>
             </a>
             <a href="https://angel.co/u/cathimn">
               <i className="fa fa-angellist" style={styles.angelListIcon}/>
@@ -48,6 +48,9 @@ export default function () {
         <div style={styles.profileContainer}>
           <p style={styles.profileName}>Dong Hyuk Kim</p>
           <div style={styles.iconsContainer}>
+            <a href="https://kimd345.github.io/" style={styles.gitHubIcon}>
+              <i className="fa fa-briefcase"/>
+            </a>
             <a href="https://angel.co/u/dong-hyuk-kim">
               <i className="fa fa-angellist" style={styles.angelListIcon}/>
             </a>
