@@ -21,7 +21,7 @@ Welcome to WOGOS! [WOGOS](https://wogos.herokuapp.com/) is a single page applica
 - Frontend - JavaScript | React | Redux
 - Backend - Python | Flask
 - Database - PostgreSQL
-- Design - HTML5 / CSS
+- Styling - HTML5 / CSS
 
 ---
 
