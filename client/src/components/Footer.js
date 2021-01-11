@@ -130,6 +130,8 @@ const styles = {
 
 const bubbleStyles = {
   container: {
+    cursor: 'pointer',
+    zIndex: '1',
     position: 'fixed',
     bottom: '20px',
     right: '50px',
